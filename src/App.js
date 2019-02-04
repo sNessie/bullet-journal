@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
 import './App.css';
+import AddForm from './components/AddForm/AddForm';
+import DashboardPage from './components/DashboardPage/DashboardPage';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import Header from './components/Header/Header';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+
+const App = () => (
+    <BrowserRouter>
+    <div>
+      <Header />
+      <Switch>
+        <Route path="/" component={DashboardPage} exact={true} />
+        <Route path="/add" component={AddForm} />
+        <Route component={NotFoundPage} />
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
+
 
 export default App;

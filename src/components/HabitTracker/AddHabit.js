@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import uuid from 'uuid';
 
 
 class AddHabbit extends Component{
@@ -20,8 +21,9 @@ class AddHabbit extends Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const id = uuid();
     this.setState({
-      id: '',
+      id: id,
       name: '',
       date: '',
       times: 0,
@@ -32,6 +34,7 @@ class AddHabbit extends Component{
       }],
       ready: 0
     });
+    console.log(this.state);
   } ;
 
   render(){

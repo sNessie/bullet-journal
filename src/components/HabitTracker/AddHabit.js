@@ -21,6 +21,11 @@ class AddHabbit extends Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const timesRepeat = this.generateTimesRepeat(this.state.date, this.state.times);
+    console.log(timesRepeat);
+    this.setState(
+      timesRepeat
+    );
     this.setState({
       id: uuid(),
       name: '',
@@ -32,8 +37,22 @@ class AddHabbit extends Component{
         ready: false
       }],
     });
-    console.log(this.state);
 };
+
+generateTimesRepeat = (date, times) => {
+  let startDate = new Date(date);
+  times = parseInt(times, 10);
+  let timesRepeat = [];
+  let id;
+  for(let i=0; i<times; i++){
+    id = uuid();
+    startDate.setDate(startDate.getDate() + i);
+    timesRepeat.push({id: id, date: startDate.toISOString().substring(0, 10), ready: false });
+
+  }
+  return timesRepeat;
+
+}
 
   render(){
     const {name, date, times} = this.state;

@@ -4,7 +4,7 @@ import uuid from 'uuid';
 
 class AddHabbit extends Component{
   state = {
-    id: '',
+    id: uuid(),
     name: '',
     date: '',
     times: 0 ,
@@ -21,9 +21,8 @@ class AddHabbit extends Component{
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const id = uuid();
     this.setState({
-      id: id,
+      id: uuid(),
       name: '',
       date: '',
       times: 0,
@@ -32,12 +31,12 @@ class AddHabbit extends Component{
         date: '',
         ready: false
       }],
-      ready: 0
     });
     console.log(this.state);
-  } ;
+};
 
   render(){
+    const {name, date, times} = this.state;
   return (
     <div>
           <form onSubmit={this.handleSubmit}>
@@ -45,11 +44,13 @@ class AddHabbit extends Component{
               required 
               placeholder="name"
               name="name"
+              value={name}
               onChange={this.handleChange} />
             <label>
               Start date:
               <input type="date"
               name = "date"
+              value={date}
               onChange={this.handleChange}
                 required />
             </label>
@@ -60,6 +61,7 @@ class AddHabbit extends Component{
                 min="1" 
                 max="60"
                 name="times"
+                value={times}
                 onChange={this.handleChange} />
             </label>
             <button type="submit">+</button>

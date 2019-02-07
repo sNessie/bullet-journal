@@ -22,7 +22,7 @@ class AddHabbit extends Component{
   handleSubmit = (e) => {
     e.preventDefault();
     const timesRepeat = this.generateTimesRepeat(this.state.date, this.state.times);
-    console.log(timesRepeat);
+    this.props.handleSave({...this.state, timesRepeat});
     this.setState(
       timesRepeat
     );

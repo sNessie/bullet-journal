@@ -13,7 +13,7 @@ class AddHabbit extends Component{
       date: '',
       ready: false
     }],
-  }; 
+  };
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});

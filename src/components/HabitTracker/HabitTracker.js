@@ -4,7 +4,7 @@ import AddHabit from './AddHabit';
 
 class HabitTracker extends Component {
   state = {
-    showAddForm: false
+    showAddForm: false, 
   }
 
   showForm = () => {
@@ -20,7 +20,7 @@ class HabitTracker extends Component {
     return(
       <div>
         <button onClick={this.showForm}>
-          Add form habit
+        {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
         {showAddForm ? <AddHabit /> : null }
       </div>

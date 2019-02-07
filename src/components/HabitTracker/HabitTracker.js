@@ -24,7 +24,6 @@ class HabitTracker extends Component {
         </button>
         {showAddForm ? <AddHabit /> : null }
       </div>
-    
     )
   }
 }

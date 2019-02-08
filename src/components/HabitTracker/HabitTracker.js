@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import AddHabit from './AddHabit';
 import uuid from 'uuid';
+import ListHabits from './ListHabits';
 
 
 class HabitTracker extends Component {
@@ -27,13 +28,14 @@ class HabitTracker extends Component {
   };
 
   render (){
-    const {showAddForm} = this.state;
+    const {showAddForm, habits} = this.state;
     return(
       <div>
         <button onClick={this.showForm}>
         {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
         {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
+        <ListHabits habits={habits} />
       </div>
     )
   }

@@ -8,11 +8,7 @@ class AddHabbit extends Component{
     name: '',
     date: '',
     times: 0 ,
-    timesRepeat: [{
-      id: '',
-      date: '',
-      ready: false
-    }],
+    timesRepeat: []
   };
 
   handleChange = (e) => {
@@ -31,11 +27,7 @@ class AddHabbit extends Component{
       name: '',
       date: '',
       times: 0,
-      timesRepeat: [{
-        id: '',
-        date: '',
-        ready: false
-      }],
+      timesRepeat: []
     });
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import ListTimesOfHabit from './ListTimesOfHabit';
 
 
 const ListHabits = ({habits}) => {
@@ -13,6 +14,10 @@ const ListHabits = ({habits}) => {
             </div>
             <div>
                 Times to repeat: {habit.times}
+            </div>
+            <div>
+                Ready:
+                <ListTimesOfHabit />
             </div>
             </div>
 

@@ -17,7 +17,7 @@ const ListHabits = ({habits}) => {
             </div>
             <div>
                 Ready:
-                <ListTimesOfHabit />
+                <ListTimesOfHabit times={habit.timesRepeat}/>
             </div>
             </div>
 

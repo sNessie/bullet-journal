@@ -1,11 +1,23 @@
 import React from 'react';
 
 
-const ListTimesOfHabit= () => {
-
+const ListTimesOfHabit= ({times}) => {
+    const timesList = times.map(time => {
+        return(
+        <div>
+            <div>
+                date: {time.date}
+            </div>
+            <div>
+                ready:
+                {time.ready ? 'yes' :'no'}
+            </div>
+        </div>
+        )
+    });
     return (
         <div>
-            times of repeats
+            {timesList}
         </div>
     )
 

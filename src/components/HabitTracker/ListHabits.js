@@ -2,7 +2,7 @@ import React from 'react';
 import ListTimesOfHabit from './ListTimesOfHabit';
 
 
-const ListHabits = ({habits}) => {
+const ListHabits = ({habits, makeReady}) => {
     const habitsList = habits.map(habit => {
         return (
             <div>
@@ -17,7 +17,7 @@ const ListHabits = ({habits}) => {
             </div>
             <div>
                 Ready:
-                <ListTimesOfHabit times={habit.timesRepeat}/>
+                <ListTimesOfHabit times={habit.timesRepeat}  makeReady = {makeReady}/>
             </div>
             </div>
 

@@ -27,6 +27,12 @@ class HabitTracker extends Component {
   });
   };
 
+  makeReady = () => {
+    return(
+      console.log('ready for id')
+    )
+  };
+
   render (){
     const {showAddForm, habits} = this.state;
     return(
@@ -35,7 +41,7 @@ class HabitTracker extends Component {
         {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
         {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
-        <ListHabits habits={habits} />
+        <ListHabits habits={habits}  makeReady = {this.makeReady} />
       </div>
     )
   }

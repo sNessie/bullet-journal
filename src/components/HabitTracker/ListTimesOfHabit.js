@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const ListTimesOfHabit= ({times}) => {
+const ListTimesOfHabit= ({times, makeReady}) => {
     const timesList = times.map(time => {
         return(
         <div>
@@ -9,8 +9,8 @@ const ListTimesOfHabit= ({times}) => {
                 date: {time.date}
             </div>
             <div>
-                ready:
-                {time.ready ? 'yes' :'no'}
+                ready: {time.ready ? 'yes' :'no'} 
+                <button onClick={makeReady}>Make ready</button>
             </div>
         </div>
         )

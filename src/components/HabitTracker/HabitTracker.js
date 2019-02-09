@@ -27,9 +27,9 @@ class HabitTracker extends Component {
   });
   };
 
-  makeReady = () => {
+  makeReady = (id) => {
     return(
-      console.log('ready for id')
+      console.log(`ready for id: ${id}`)
     )
   };
 

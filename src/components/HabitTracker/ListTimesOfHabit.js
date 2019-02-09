@@ -10,7 +10,7 @@ const ListTimesOfHabit= ({times, makeReady}) => {
             </div>
             <div>
                 ready: {time.ready ? 'yes' :'no'} 
-                <button onClick={makeReady}>Make ready</button>
+                <button  onClick={() => makeReady(time.id)}>Make ready</button>
             </div>
         </div>
         )

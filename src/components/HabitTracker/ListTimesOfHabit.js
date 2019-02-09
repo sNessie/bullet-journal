@@ -4,7 +4,7 @@ import React from 'react';
 const ListTimesOfHabit= ({times, makeReady}) => {
     const timesList = times.map(time => {
         return(
-        <div>
+        <div key={time.id}>
             <div>
                 date: {time.date}
             </div>

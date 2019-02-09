@@ -5,7 +5,7 @@ import ListTimesOfHabit from './ListTimesOfHabit';
 const ListHabits = ({habits, makeReady}) => {
     const habitsList = habits.map(habit => {
         return (
-            <div>
+            <div key={habit.id}>
             <h1>
                 {habit.name}
             </h1>

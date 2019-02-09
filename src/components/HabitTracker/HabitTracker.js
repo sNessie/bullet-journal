@@ -7,7 +7,19 @@ import ListHabits from './ListHabits';
 class HabitTracker extends Component {
   state = {
     showAddForm: false,
-    habits: []
+    habits: [
+      {
+        name: 'walk a dog',
+        id: '0',
+        date: '2019-02-01',
+        times: 1, 
+        timesRepeat: [{
+          "id": 101,
+          "date":"2018-09-05",
+          "ready": false
+        }]
+      }
+    ]
   }
 
   showForm = () => {
@@ -27,9 +39,10 @@ class HabitTracker extends Component {
   });
   };
 
-  makeReady = (id) => {
+  makeReady = (i) => {
+    const habitReady = this.state.habits.find(h =>h.timesRepeat.find(t => t.id === i));
     return(
-      console.log(`ready for id: ${id}`)
+      console.log(`ready for id: ${habitReady.name}`)
     )
   };
 

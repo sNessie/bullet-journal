@@ -40,10 +40,14 @@ class HabitTracker extends Component {
   };
 
   makeReady = (i) => {
-    const habitReady = this.state.habits.find(h =>h.timesRepeat.find(t => t.id === i));
-    return(
-      console.log(`ready for id: ${habitReady.name}`)
-    )
+    this.setState(() => {
+      const readyHabit = this.state.habits.find(h => (h.timesRepeat.find(t => t.id === i))); 
+      const readyDayHabit = readyHabit.timesRepeat.find(t => t.id === i);
+      readyDayHabit.ready = !readyDayHabit.ready;
+      return{
+        habits: [...this.state.habits]
+      }
+  })
   };
 
   render (){

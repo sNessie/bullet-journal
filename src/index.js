@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
 import rootReducers from './reducers/rootReducers';
-import {addHabit } from './reducers/habitsReducers';
+import {addHabit, removeHabit } from './reducers/habitsReducers';
 
 
 
@@ -16,8 +16,11 @@ store.subscribe(() => {
     console.log(store.getState());
   });
 
-store.dispatch(addHabit({name: "walk a dog", date: '2019-02-01'}));
-store.dispatch(addHabit({name: "jogging", date: '2019-02-09'}));
+const habitOne = store.dispatch(addHabit({name: "walk a dog", date: '2019-02-01'}));
+const habitTwo = store.dispatch(addHabit({name: "jogging", date: '2019-02-09'}));
 
+console.log(habitOne);
+
+store.dispatch(removeHabit({id: habitOne.habit.id}));
 ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.register();

@@ -25,7 +25,7 @@ export const removeHabit = ({id} = {}) => ({
 
 export const editHabit = (id, updates) => ({
   type: 'EDIT_HABIT',
-  id, 
+  id,
   updates
 });
 
@@ -33,7 +33,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
   switch (action.type) {
     case 'ADD_HABIT':
       return [
-        ...state, 
+        ...state,
         action.habit
       ];
       case 'REMOVE_HABIT':
@@ -42,7 +42,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
       return state.map((habit)=>{
         if (habit.id === action.id){
           return {
-            ...habit, 
+            ...habit,
             ...action.updates
           }
         } else {

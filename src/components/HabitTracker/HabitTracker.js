@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AddHabit from './AddHabit';
 import uuid from 'uuid';
 import ListHabits from './ListHabits';
+import FiltersForm from "./FiltersForm";
 import { connect } from 'react-redux';
 import { visibleHabits } from '../../reducers/rootReducers';
 
@@ -49,6 +50,7 @@ class HabitTracker extends Component {
         <button onClick={this.showForm}>
         {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
+        <FiltersForm />
         {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
         <ListHabits habits={this.props.habits}  makeReady = {this.makeReady} />
       </div>

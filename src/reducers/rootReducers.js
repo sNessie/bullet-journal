@@ -9,11 +9,9 @@ export const visibleHabits = (habits, {text}) => {
   })
 };
 
- const rootReducer = combineReducers({
-  habits: habitsReducers, 
+export const rootReducers = combineReducers({
+  habits: habitsReducers,
   filters: filtersReducers
 });
 
 
-
-export default rootReducer;

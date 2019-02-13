@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './routers/App';
 import * as serviceWorker from './serviceWorker';
+import { Provider } from 'react-redux';
 
 import { createStore } from 'redux';
-import rootReducers from './reducers/rootReducers';
-import {visibleHabits} from './reducers/rootReducers';
-import {addHabit, removeHabit, editHabit } from './reducers/habitsReducers';
-import {setTextFilter} from './reducers/filtersReducers';
+import {visibleHabits, rootReducers} from './reducers/rootReducers';
+import { addHabit } from './reducers/habitsReducers';
+
 
 
 
@@ -25,14 +25,14 @@ store.subscribe(() => {
 const habitOne = store.dispatch(addHabit({name: "walk a dog", date: '2019-02-01'}));
 const habitTwo = store.dispatch(addHabit({name: "jogging with dog", date: '2019-02-09'}));
 
-// store.dispatch(removeHabit({id: habitOne.habit.id}));
-// store.dispatch(editHabit(habitTwo.habit.id, {name: 'go to a gym'}));
-
-store.dispatch(setTextFilter('walk'));
-store.dispatch(setTextFilter('dog'));
 
 
+const prov = (
+  <Provider store={store} >
+    <App />
+  </Provider>
+);
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(prov, document.getElementById('root'));
 serviceWorker.register();

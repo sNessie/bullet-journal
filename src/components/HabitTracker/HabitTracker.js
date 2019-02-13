@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import AddHabit from './AddHabit';
 import uuid from 'uuid';
 import ListHabits from './ListHabits';
+import { connect } from 'react-redux';
 
 
 class HabitTracker extends Component {
-  state = {
+  constructor(props){
+    super(props);
+    this.state = {
     showAddForm: false,
     habits: [
       {
@@ -21,6 +24,7 @@ class HabitTracker extends Component {
       }
     ]
   }
+}
 
   showForm = () => {
     this.setState((prevState, props) => {
@@ -51,17 +55,23 @@ class HabitTracker extends Component {
   };
 
   render (){
-    const {showAddForm, habits} = this.state;
+    const { showAddForm } = this.state;
     return(
       <div>
         <button onClick={this.showForm}>
         {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
         {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
-        <ListHabits habits={habits}  makeReady = {this.makeReady} />
+        <ListHabits habits={this.props.habits}  makeReady = {this.makeReady} />
       </div>
     )
   }
 }
 
-export default HabitTracker;
+const ConnectHabitsList = connect((state)=>{
+  return {
+      habits: state.habits
+    };
+})(HabitTracker);
+
+export default ConnectHabitsList;

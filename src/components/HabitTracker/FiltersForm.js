@@ -9,10 +9,10 @@ class FiltersForm extends Component {
     render() {
         return (
             <div>
-                <input 
-                    type="text" 
-                    placeholder="search" 
-                    value={this.props.filters.text}  
+                <input
+                    type="text"
+                    placeholder="search"
+                    value={this.props.filters.text}
                     onChange={(e) => {
                         this.props.dispatch(setTextFilter(e.target.value))
                     }}

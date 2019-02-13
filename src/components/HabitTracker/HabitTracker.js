@@ -3,8 +3,6 @@ import AddHabit from './AddHabit';
 import uuid from 'uuid';
 import ListHabits from './ListHabits';
 import FiltersForm from "./FiltersForm";
-import { connect } from 'react-redux';
-import { visibleHabits } from '../../reducers/rootReducers';
 
 
 class HabitTracker extends Component {
@@ -52,17 +50,13 @@ class HabitTracker extends Component {
         </button>
         <FiltersForm />
         {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
-        <ListHabits habits={this.props.habits}  makeReady = {this.makeReady} />
+        <ListHabits  />
       </div>
     )
   }
 };
 
-const mapStateToProps = (state) => {
-  return {
-    habits: visibleHabits(state.habits, state.filters)
-  };
-}
+export default HabitTracker;
 
-export default connect(mapStateToProps)(HabitTracker);
+
 

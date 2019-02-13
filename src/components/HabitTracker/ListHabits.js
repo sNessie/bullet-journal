@@ -2,16 +2,19 @@ import React from 'react';
 import ListTimesOfHabit from './ListTimesOfHabit';
 import { connect } from 'react-redux';
 import { visibleHabits } from '../../reducers/rootReducers';
+import { removeHabit } from '../../reducers/habitsReducers';
 
 
-const ListHabits = ({ habits }) => {
+const ListHabits = ({habits, dispatch}) => {
     const habitsList = habits.map(habit => {
         return (
             <div key={habit.id}>
             <h1>
                 {habit.name}
             </h1>
-            <button>Remove</button>
+            <button onClick={() => {
+                        dispatch(removeHabit({id: habit.id}))
+                    }}>Remove</button>
             <div>
                 Date of starting: {habit.date}
             </div>

@@ -6,7 +6,8 @@ export const addHabit = (
   {
     name = '',
     date = '',
-    times = 0
+    times = 0, 
+    timesRepeat = []
   } = {}
   ) => ({
   type: 'ADD_HABIT',
@@ -14,7 +15,8 @@ export const addHabit = (
     id:uuid(),
     name,
     date,
-    times
+    times, 
+    timesRepeat
   }
 });
 

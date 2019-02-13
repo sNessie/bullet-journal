@@ -22,7 +22,16 @@ store.subscribe(() => {
   console.log(getVisibleHabits);
   });
 
-const habitOne = store.dispatch(addHabit({name: "walk a dog", date: '2019-02-01'}));
+const habitOne = store.dispatch(addHabit({
+  name: 'walk a dog',
+  date: '2019-02-01',
+  times: 1,
+  timesRepeat: [{
+    "id": 101,
+    "date":"2018-09-05",
+    "ready": false
+        }]
+}));
 const habitTwo = store.dispatch(addHabit({name: "jogging with dog", date: '2019-02-09'}));
 
 

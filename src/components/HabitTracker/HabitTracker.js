@@ -3,26 +3,14 @@ import AddHabit from './AddHabit';
 import uuid from 'uuid';
 import ListHabits from './ListHabits';
 import { connect } from 'react-redux';
+import { visibleHabits } from '../../reducers/rootReducers';
 
 
 class HabitTracker extends Component {
   constructor(props){
     super(props);
     this.state = {
-    showAddForm: false,
-    habits: [
-      {
-        name: 'walk a dog',
-        id: '0',
-        date: '2019-02-01',
-        times: 1, 
-        timesRepeat: [{
-          "id": 101,
-          "date":"2018-09-05",
-          "ready": false
-        }]
-      }
-    ]
+    showAddForm: false
   }
 }
 
@@ -70,7 +58,7 @@ class HabitTracker extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    habits: state.habits
+    habits: visibleHabits(state.habits, state.filters)
   };
 }
 

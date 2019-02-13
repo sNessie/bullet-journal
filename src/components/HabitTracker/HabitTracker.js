@@ -66,12 +66,13 @@ class HabitTracker extends Component {
       </div>
     )
   }
+};
+
+const mapStateToProps = (state) => {
+  return {
+    habits: state.habits
+  };
 }
 
-const ConnectHabitsList = connect((state)=>{
-  return {
-      habits: state.habits
-    };
-})(HabitTracker);
+export default connect(mapStateToProps)(HabitTracker);
 
-export default ConnectHabitsList;

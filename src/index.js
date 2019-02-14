@@ -29,7 +29,7 @@ store.dispatch(addHabit({
 
 store.dispatch(addHabit({name: "jogging with dog", date: '2019-02-09'}));
 
-store.dispatch(setTextFilter('dog'));
+// store.dispatch(setTextFilter('dog'));
 
 
 const prov = (

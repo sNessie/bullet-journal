@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import uuid from 'uuid';
 
 
-class AddHabbit extends Component{
+
+export default class AddHabbit extends Component {
   state = {
     id: uuid(),
     name: '',
@@ -13,6 +14,13 @@ class AddHabbit extends Component{
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
+  };
+
+  onTimesChange = (e) => {
+    const times = e.target.value;
+    if(times.match(/^([1-9]|[12]\d|9[0-9])$/)){
+    this.setState(() => ({times}));
+  }
   };
 
   handleSubmit = (e) => {
@@ -48,6 +56,7 @@ generateTimesRepeat = (date, times) => {
 
   render(){
     const {name, date, times} = this.state;
+    const today = new Date().toISOString().substring(0, 10);
   return (
     <div>
           <form onSubmit={this.handleSubmit}>
@@ -56,11 +65,13 @@ generateTimesRepeat = (date, times) => {
               placeholder="name"
               name="name"
               value={name}
+              autoFocus
               onChange={this.handleChange} />
             <label>
               Start date:
               <input type="date"
               name = "date"
+              min= {today}
               value={date}
               onChange={this.handleChange}
                 required />
@@ -70,10 +81,10 @@ generateTimesRepeat = (date, times) => {
               <input type="number"
                 required 
                 min="1" 
-                max="60"
+                max="100"
                 name="times"
                 value={times}
-                onChange={this.handleChange} />
+                onChange={this.onTimesChange} />
             </label>
             <button type="submit">+</button>
           </form>
@@ -81,4 +92,4 @@ generateTimesRepeat = (date, times) => {
   )
 }}
 
-export default AddHabbit
+

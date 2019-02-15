@@ -13,7 +13,7 @@ export default class AddHabbit extends Component {
     id: uuid(),
     name: '',
     date: moment(),
-    times: 0 ,
+    times: '' ,
     timesRepeat: [], 
     focused: false
   };
@@ -24,7 +24,7 @@ export default class AddHabbit extends Component {
 
   onTimesChange = (e) => {
     const times = e.target.value;
-    if(times.match(/^([1-9]|[12]\d|9[0-9])$/)){
+    if(!times || times.match(/^([1-9]|[12]\d|9[0-9])$/)){
     this.setState(() => ({times}));
   }
   };
@@ -70,7 +70,6 @@ generateTimesRepeat = (date, times) => {
 
   render(){
     const {name, date, times} = this.state;
-    const today = new Date().toISOString().substring(0, 10);
   return (
     <div>
           <form onSubmit={this.handleSubmit}>

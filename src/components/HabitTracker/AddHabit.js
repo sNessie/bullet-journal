@@ -1,5 +1,10 @@
 import React, {Component} from 'react';
 import uuid from 'uuid';
+import moment from 'moment';
+import { SingleDatePicker } from 'react-dates';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+
 
 
 
@@ -7,9 +12,10 @@ export default class AddHabbit extends Component {
   state = {
     id: uuid(),
     name: '',
-    date: '',
+    date: moment(),
     times: 0 ,
-    timesRepeat: []
+    timesRepeat: [], 
+    focused: false
   };
 
   handleChange = (e) => {
@@ -38,6 +44,14 @@ export default class AddHabbit extends Component {
       timesRepeat: []
     });
 };
+
+  onDateChange = (date) => {
+    this.setState(() => ({date}));
+  };
+
+  onFocusChange = ({ focused }) => {
+    this.setState(() => ({ focused }))
+  }
 
 generateTimesRepeat = (date, times) => {
   let startDate = new Date(date);
@@ -69,12 +83,20 @@ generateTimesRepeat = (date, times) => {
               onChange={this.handleChange} />
             <label>
               Start date:
-              <input type="date"
+              <SingleDatePicker
+                  date={this.state.date}
+                  onDateChange = {this.onDateChange}
+                  focused = {this.state.focused}
+                  onFocusChange={this.onFocusChange}
+                  numberOfMonths={1}
+                  id="123"
+                  />
+              {/* <input type="date"
               name = "date"
               min= {today}
               value={date}
               onChange={this.handleChange}
-                required />
+                required /> */}
             </label>
             <label>
               Days repeat:
@@ -85,6 +107,7 @@ generateTimesRepeat = (date, times) => {
                 name="times"
                 value={times}
                 onChange={this.onTimesChange} />
+                
             </label>
             <button type="submit">+</button>
           </form>

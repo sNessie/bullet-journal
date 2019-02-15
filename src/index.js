@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { rootReducers } from './reducers/rootReducers';
 import { addHabit } from './reducers/habitsReducers';
-import { setTextFilter } from './reducers/filtersReducers';
+// import { setTextFilter } from './reducers/filtersReducers';
 
 
 

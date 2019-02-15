@@ -15,7 +15,9 @@ export default class AddHabbit extends Component {
     date: moment(),
     times: '' ,
     timesRepeat: [], 
-    focused: false
+    focused: false, 
+    errorName: '', 
+    errorTimes: ''
   };
 
   handleChange = (e) => {
@@ -31,18 +33,26 @@ export default class AddHabbit extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const timesRepeat = this.generateTimesRepeat(this.state.date, this.state.times);
-    this.props.handleSave({...this.state, timesRepeat});
-    this.setState(
-      timesRepeat
-    );
-    this.setState({
-      id: uuid(),
-      name: '',
-      date: '',
-      times: 0,
-      timesRepeat: []
-    });
+    if (!this.state.name ){
+      this.setState(() => ({errorName: "Name cannot be black" }));
+    } else if(!this.state.times){
+      this.setState(() => ({errorTimes: "Times cannot be black" }));
+    } else {
+      console.log('submit');
+      this.setState(() => ({errorTimes: '', errorName: '' }));
+    }
+    // const timesRepeat = this.generateTimesRepeat(this.state.date, this.state.times);
+    // this.props.handleSave({...this.state, timesRepeat});
+    // this.setState(
+    //   timesRepeat
+    // );
+    // this.setState({
+    //   id: uuid(),
+    //   name: '',
+    //   date: '',
+    //   times: 0,
+    //   timesRepeat: []
+    // });
 };
 
   onDateChange = (date) => {
@@ -69,12 +79,12 @@ generateTimesRepeat = (date, times) => {
 }
 
   render(){
-    const {name, date, times} = this.state;
+    const {name, times} = this.state;
   return (
     <div>
           <form onSubmit={this.handleSubmit}>
             <input type="text"
-              required 
+              required
               placeholder="name"
               name="name"
               value={name}
@@ -110,6 +120,7 @@ generateTimesRepeat = (date, times) => {
             </label>
             <button type="submit">+</button>
           </form>
+          <div>{this.state.errorName} {this.state.errorTimes}</div>
     </div>
   )
 }}

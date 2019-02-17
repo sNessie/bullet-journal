@@ -4,21 +4,25 @@ import moment from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import { connect } from 'react-redux';
+import { addHabit } from '../../reducers/habitsReducers';
 
 
 
 
-export default class AddHabbit extends Component {
-  state = {
-    id: uuid(),
-    name: '',
-    date: moment(),
-    times: '' ,
-    timesRepeat: [], 
-    focused: false, 
-    errorName: '', 
-    errorTimes: ''
-  };
+class AddHabbit extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      name: '',
+      date: moment(),
+      times: '' ,
+      timesRepeat: [],
+      focused: false,
+      errorName: '',
+      errorTimes: ''
+    };
+}
 
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
@@ -36,23 +40,25 @@ export default class AddHabbit extends Component {
     if (!this.state.name ){
       this.setState(() => ({errorName: "Name cannot be black" }));
     } else if(!this.state.times){
-      this.setState(() => ({errorTimes: "Times cannot be black" }));
+      this.setState(() => ({errorTimes: "Times cannot be black", errorName: '' }));
     } else {
-      console.log('submit');
-      this.setState(() => ({errorTimes: '', errorName: '' }));
+      const newHabit={
+        name: this.state.name, 
+        date: this.state.date.format('YYYY-MM-DD'),
+        times: this.state.times,
+        timesRepeat: this.generateTimesRepeat(this.state.date, this.state.times)
+      };
+      this.props.dispatch(addHabit(newHabit));
+      this.props.showForm();
     }
-    // const timesRepeat = this.generateTimesRepeat(this.state.date, this.state.times);
-    // this.props.handleSave({...this.state, timesRepeat});
-    // this.setState(
-    //   timesRepeat
-    // );
-    // this.setState({
-    //   id: uuid(),
-    //   name: '',
-    //   date: '',
-    //   times: 0,
-    //   timesRepeat: []
-    // });
+      this.setState({
+        name: '',
+        date: moment(),
+        times: 0,
+        timesRepeat: [],
+        errorName: '',
+        errorTimes: ''
+      });
 };
 
   onDateChange = (date) => {
@@ -100,23 +106,16 @@ generateTimesRepeat = (date, times) => {
                   numberOfMonths={1}
                   id="123"
                   />
-              {/* <input type="date"
-              name = "date"
-              min= {today}
-              value={date}
-              onChange={this.handleChange}
-                required /> */}
             </label>
             <label>
               Days repeat:
               <input type="number"
-                required 
-                min="1" 
+                required
+                min="1"
                 max="100"
                 name="times"
                 value={times}
                 onChange={this.onTimesChange} />
-                
             </label>
             <button type="submit">+</button>
           </form>
@@ -125,4 +124,4 @@ generateTimesRepeat = (date, times) => {
   )
 }}
 
-
+export default connect()(AddHabbit);

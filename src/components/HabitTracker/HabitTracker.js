@@ -49,7 +49,7 @@ class HabitTracker extends Component {
         {showAddForm ? 'Hide add form' :'Show add form'}
         </button>
         <FiltersForm />
-        {showAddForm ? <AddHabit handleSave={this.handleSave} /> : null }
+        {showAddForm ? <AddHabit showForm={this.showForm} /> : null }
         <ListHabits  />
       </div>
     )

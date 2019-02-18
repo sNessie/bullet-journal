@@ -6,7 +6,7 @@ export const addHabit = (
   {
     name = '',
     date = '',
-    times = 0, 
+    times = 0,
     timesRepeat = []
   } = {}
   ) => ({
@@ -15,7 +15,7 @@ export const addHabit = (
     id:uuid(),
     name,
     date,
-    times, 
+    times,
     timesRepeat
   }
 });
@@ -29,6 +29,10 @@ export const editHabit = (id, updates) => ({
   type: 'EDIT_HABIT',
   id,
   updates
+});
+export const makeHabit = (id) => ({
+  type: 'MAKE_HABIT',
+  id
 });
 
 const habitsReducers = (state = habitsDefaultState, action) => {
@@ -50,7 +54,25 @@ const habitsReducers = (state = habitsDefaultState, action) => {
         } else {
           return habit;
         }
-      });
+        });
+      case 'MAKE_HABIT':
+      return state.map((habit)=>{ 
+        habit.timesRepeat.map((t) =>{
+            if (t.id === action.id){
+              t.ready = !t.ready;
+                return console.log({
+                  ...t
+                }) 
+            }else{
+              return{
+                ...t
+              }
+            }}
+            )
+        return {
+            ...habit
+          }
+        });
     default:
       return state;
   }

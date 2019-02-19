@@ -56,7 +56,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
         }
         });
       case 'MAKE_HABIT':
-      const ready = state.map((habit)=>{ 
+      return state.map((habit)=>{
         habit.timesRepeat.map((t) =>{
             if (t.id === action.id){
               t.ready = !t.ready;
@@ -73,10 +73,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
             ...habit
           }
         });
-      return [
-        ...state,
-        ...ready
-      ];
+      // return console.log(ready);
     default:
       return state;
   }

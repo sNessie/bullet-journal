@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { makeHabit } from '../../reducers/habitsReducers';
+import { visibleHabits } from '../../reducers/rootReducers';
 
 class ListTimesOfHabit extends Component {
     constructor(props){
@@ -35,5 +36,9 @@ class ListTimesOfHabit extends Component {
     }
 }
 
-
-export default connect()(ListTimesOfHabit);
+const mapStateToProps = (state) => {
+    return {
+      habits: visibleHabits(state.habits, state.filters)
+    };
+  }
+export default connect(mapStateToProps)(ListTimesOfHabit);

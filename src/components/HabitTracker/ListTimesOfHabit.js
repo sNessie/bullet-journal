@@ -8,7 +8,6 @@ class ListTimesOfHabit extends Component {
         super(props)
     }
     handleClick = (id) => {
-        
         this.props.dispatch(makeHabit(id));
     }
     render (){
@@ -20,9 +19,13 @@ class ListTimesOfHabit extends Component {
                 </div>
                 <div>
                     ready: {time.ready ? 'yes' :'no'}
+                    {time.ready ? ''
+                    :
                     <button  onClick={() => this.handleClick(time.id)}>
                         Make ready
-                    </button>
+                    </button> 
+                    }
+                    
                 </div>
             </div>
             )

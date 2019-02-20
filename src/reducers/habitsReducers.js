@@ -59,7 +59,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
       return state.map((habit)=>{
         habit.timesRepeat.map((t) =>{
             if (t.id === action.id){
-              t.ready = !t.ready;
+              t.ready = true;
                 return{
                   ...t
                 }

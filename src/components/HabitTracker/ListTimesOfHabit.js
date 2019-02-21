@@ -4,9 +4,7 @@ import { makeHabit } from '../../reducers/habitsReducers';
 import { visibleHabits } from '../../reducers/rootReducers';
 
 class ListTimesOfHabit extends Component {
-    constructor(props){
-        super(props)
-    }
+
     handleClick = (id) => {
         this.props.dispatch(makeHabit(id));
     }
@@ -23,9 +21,8 @@ class ListTimesOfHabit extends Component {
                     :
                     <button  onClick={() => this.handleClick(time.id)}>
                         Make ready
-                    </button> 
+                    </button>
                     }
-                    
                 </div>
             </div>
             )

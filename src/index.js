@@ -14,7 +14,7 @@ import { addHabit } from './reducers/habitsReducers';
 
 
 
-const store = createStore(rootReducers);
+const store = createStore(rootReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 store.dispatch(addHabit({
   name: 'walk a dog',

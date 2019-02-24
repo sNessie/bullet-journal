@@ -11,5 +11,5 @@ app.listen(port, ()=> {
 }); // which port should node use to setup server
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
+  res.sendFile(path.join(publicPath, 'index.js'));
 }) // this fn made it is possible to go direct to site (without this is become error  )

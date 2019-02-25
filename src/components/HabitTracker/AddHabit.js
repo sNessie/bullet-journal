@@ -76,7 +76,7 @@ generateTimesRepeat = (date, times) => {
   let id;
   for(let i=0; i<times; i++){
     id = uuid();
-    startDate.setDate(startDate.getDate() + i);
+    startDate.setDate(startDate.getDate() + 1);
     timesRepeat.push({id: id, date: startDate.toISOString().substring(0, 10), ready: false });
 
   }

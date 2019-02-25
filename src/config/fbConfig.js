@@ -15,6 +15,18 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().on('value', (snapshot) => {
-    console.log(snapshot.val());
-})
+
+
+// Setup data subscription
+database.ref('habits').on('value', (snapshot) => {
+    const habits = [];
+
+    snapshot.forEach((childSnapshot)=>{
+        habits.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+        });
+});
+console.log(habits);
+});
+

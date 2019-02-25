@@ -1,12 +1,10 @@
 {
-  "name": "new_habit_tracker",
+  "name": "bullet_journal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "express": "^4.16.4",
-    "express-favicon": "^2.0.1",
+    "firebase": "^5.8.4",
     "moment": "^2.24.0",
-    "path": "^0.12.7",
     "react": "^16.7.0",
     "react-addons-shallow-compare": "^15.6.2",
     "react-dates": "^19.0.3",
@@ -21,7 +19,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"

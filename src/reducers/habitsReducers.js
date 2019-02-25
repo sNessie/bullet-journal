@@ -73,7 +73,6 @@ const habitsReducers = (state = habitsDefaultState, action) => {
             ...habit
           }
         });
-      // return console.log(ready);
     default:
       return state;
   }

@@ -15,13 +15,6 @@ firebase.initializeApp(config);
 
 const database = firebase.database();
 
-database.ref().set({
-    name: 'walk a dog',
-    date: '2019-02-01',
-    times: 1,
-    timesRepeat: [{
-        "id": 101,
-        "date":"2018-09-05",
-        "ready": false
-        }]
+database.ref().on('value', (snapshot) => {
+    console.log(snapshot.val());
 })

@@ -5,7 +5,7 @@ import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { connect } from 'react-redux';
-import { addHabit } from '../../reducers/habitsReducers';
+import { startAddHabit } from '../../reducers/habitsReducers';
 
 
 
@@ -43,12 +43,12 @@ class AddHabbit extends Component {
       this.setState(() => ({errorTimes: "Times cannot be black", errorName: '' }));
     } else {
       const newHabit={
-        name: this.state.name, 
+        name: this.state.name,
         date: this.state.date.format('YYYY-MM-DD'),
         times: this.state.times,
         timesRepeat: this.generateTimesRepeat(this.state.date, this.state.times)
       };
-      this.props.dispatch(addHabit(newHabit));
+      this.props.dispatch(startAddHabit(newHabit));
       this.props.showForm();
     }
       this.setState({

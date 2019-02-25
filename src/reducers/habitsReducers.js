@@ -1,24 +1,30 @@
 import uuid from 'uuid';
+import database from '../config/fbConfig';
 
 const habitsDefaultState = [];
 
-export const addHabit = (
-  {
-    name = '',
-    date = '',
-    times = 0,
-    timesRepeat = []
-  } = {}
-  ) => ({
+export const addHabit = ( habit ) => ({
   type: 'ADD_HABIT',
-  habit: {
-    id:uuid(),
-    name,
-    date,
-    times,
-    timesRepeat
-  }
+  habit
 });
+
+export const startAddHabit = (habitData = {}) => {
+  return (dispatch) => {
+    const {
+      name = '',
+      date = '',
+      times = 0,
+      timesRepeat = []
+    } = habitData;
+    const habit = { name, date, times, timesRepeat };
+    database.ref('habits').push(habit).then((ref) =>{
+      dispatch(addHabit({
+        id: ref.key,
+        ...habit
+      }))
+    })
+  }
+};
 
 export const removeHabit = ({id} = {}) => ({
   type: 'REMOVE_HABIT',

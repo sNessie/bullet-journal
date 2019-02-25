@@ -1,6 +1,7 @@
 import habitsReducers from './habitsReducers';
 import filtersReducers from './filtersReducers';
-import { combineReducers } from 'redux';
+import { combineReducers, } from 'redux';
+
 
 export const visibleHabits = (habits, {text}) => {
   return habits.filter((habit) => {

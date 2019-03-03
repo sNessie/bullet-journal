@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode = process.env.NODE_ENV !== 'production'
+const devMode = process.env.NODE_ENV === 'development';
+
 
 
 module.exports = (env) => {
@@ -16,13 +17,13 @@ module.exports = (env) => {
         use: ['babel-loader']
       },
       {
-          test: /\.(sa|sc|c)ss$/,
-          use: [
-            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-            'css-loader',
-            'sass-loader',
-          ],
-        }
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      }
     ]
   },
   resolve: {
@@ -35,8 +36,10 @@ module.exports = (env) => {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: devMode ? 'style/[name].css' : 'style/[name].css',
+      chunkFilename: devMode ? 'style/[id].css' : 'style/[id].css',
     })
   ],
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',

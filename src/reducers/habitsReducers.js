@@ -17,7 +17,7 @@ export const startAddHabit = (habitData = {}) => {
       timesRepeat = []
     } = habitData;
     const habit = { name, date, times, timesRepeat };
-    database.ref('habits').push(habit).then((ref) =>{
+    database.ref('habits').push(habit).then((ref) => {
       dispatch(addHabit({
         id: ref.key,
         ...habit
@@ -40,6 +40,28 @@ export const makeHabit = (id) => ({
   type: 'MAKE_HABIT',
   id
 });
+
+export const setHabits = (habits) => ({
+  type: 'SET_HABITS',
+  habits
+});
+
+export const startSetHabits = () => {
+  return (dispatch) => {
+    return database.ref('habits').once('value').then((snapshot) => {
+      const habits = [];
+
+      snapshot.forEach((childSnapshot) => {
+        habits.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+
+      dispatch(setHabits(habits));
+    });
+  };
+};
 
 const habitsReducers = (state = habitsDefaultState, action) => {
   switch (action.type) {
@@ -79,6 +101,8 @@ const habitsReducers = (state = habitsDefaultState, action) => {
             ...habit
           }
         });
+        case 'SET_HABITS':
+        return action.habits;
     default:
       return state;
   }

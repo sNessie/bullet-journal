@@ -1,23 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import App from './routers/App';
+import configureStore from './config/configureStore';
+import { startSetHabits } from './reducers/habitsReducers';
+import { visibleHabits } from './reducers/rootReducers';
+import './config/fbConfig';
+import 'react-dates/lib/css/_datepicker.css';
 import 'normalize.css/normalize.css';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose  } from 'redux';
-import { rootReducers } from './reducers/rootReducers';
-import './config/fbConfig';
-import thunk from 'redux-thunk';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
-const store = createStore(
-  rootReducers,
-  composeEnhancers(applyMiddleware(thunk))
-  );
-
-
+const store = configureStore();
 
 const prov = (
   <Provider store={store} >
@@ -25,8 +19,13 @@ const prov = (
   </Provider>
 );
 
-
 ReactDOM.render(prov, document.getElementById('root'));
+
+store.dispatch(startSetHabits()).then(() => {
+  ReactDOM.render(prov, document.getElementById('root'));
+});
+
+
 serviceWorker.register();
 
 module.hot.accept();

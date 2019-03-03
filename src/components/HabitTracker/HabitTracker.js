@@ -12,7 +12,6 @@ class HabitTracker extends Component {
     showAddForm: false
   }
 }
-
   showForm = () => {
     this.setState((prevState, props) => {
       return{
@@ -32,7 +31,7 @@ class HabitTracker extends Component {
 
   makeReady = (i) => {
     this.setState(() => {
-      const readyHabit = this.state.habits.find(h => (h.timesRepeat.find(t => t.id === i))); 
+      const readyHabit = this.state.habits.find(h => (h.timesRepeat.find(t => t.id === i)));
       const readyDayHabit = readyHabit.timesRepeat.find(t => t.id === i);
       readyDayHabit.ready = !readyDayHabit.ready;
       return{
@@ -57,6 +56,3 @@ class HabitTracker extends Component {
 };
 
 export default HabitTracker;
-
-
-

@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = (env) => {
     const isProduction = env === 'production';
@@ -13,11 +15,17 @@ module.exports = (env) => {
         use: ['babel-loader']
       },
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              // you can specify a publicPath here
+              // by default it use publicPath in webpackOptions.output
+              publicPath: '../'
+            }
+          },
+          "css-loader"
         ]
       }
     ]
@@ -31,6 +39,12 @@ module.exports = (env) => {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "[name].css",
+      chunkFilename: "[id].css"
+    })
   ],
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
   devServer: {

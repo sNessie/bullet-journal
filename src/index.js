@@ -8,7 +8,6 @@ import { visibleHabits } from './reducers/rootReducers';
 import './config/fbConfig';
 import 'react-dates/lib/css/_datepicker.css';
 import 'normalize.css/normalize.css';
-import * as serviceWorker from './serviceWorker';
 
 
 const store = configureStore();
@@ -25,7 +24,5 @@ store.dispatch(startSetHabits()).then(() => {
   ReactDOM.render(prov, document.getElementById('root'));
 });
 
-
-serviceWorker.register();
 
 module.hot.accept();

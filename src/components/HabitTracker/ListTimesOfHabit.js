@@ -4,7 +4,9 @@ import { makeHabit } from '../../reducers/habitsReducers';
 import { visibleHabits } from '../../reducers/rootReducers';
 
 class ListTimesOfHabit extends Component {
-
+  constructor(props) {
+    super(props);
+  };
     handleClick = (id) => {
         this.props.dispatch(makeHabit(id));
     }

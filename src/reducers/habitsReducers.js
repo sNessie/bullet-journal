@@ -57,7 +57,6 @@ export const startSetHabits = () => {
           ...childSnapshot.val()
         });
       });
-
       dispatch(setHabits(habits));
     });
   };

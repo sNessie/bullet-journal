@@ -1,5 +1,10 @@
 # dependencies
 /node_modules
+/public/bundle.js
+/public/bundle.js.map
+/public/style/main.css
+/public/style/main.css.map
+
 
 # testing
 /coverage
@@ -16,5 +21,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-

@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = (env) => {
     const isProduction = env === 'production';
@@ -25,12 +26,11 @@ module.exports = (env) => {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/public',
-    publicPath: '/',
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
   devServer: {

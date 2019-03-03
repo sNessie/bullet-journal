@@ -36,13 +36,11 @@ module.exports = (env) => {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
       filename: devMode ? 'style/[name].css' : 'style/[name].css',
       chunkFilename: devMode ? 'style/[id].css' : 'style/[id].css',
     })
   ],
-  devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: './public',
     hot: true

@@ -4,6 +4,7 @@
 /public/bundle.js.map
 /public/style/main.css
 /public/style/main.css.map
+.env.development
 
 
 # testing

@@ -6,7 +6,7 @@
     "start": "node server/server.js",
     "dev-server": "webpack-dev-server --config ./webpack.config.js --mode development",
     "build": "webpack -p --env production",
-    "heroku:postbuild": "npm run build",
+    "heroku-postbuild": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

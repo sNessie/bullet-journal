@@ -47,16 +47,19 @@ export const setHabits = (habits) => ({
 });
 
 export const startSetHabits = () => {
-  return (dispatch) => {
-    return database.ref('habits').once('value').then((snapshot) => {
-      const habits = [];
+  return dispatch => {
+    return database
+          .ref('habits')
+          .once('value')
+          .then(snapshot => {
+              const habits = [];
 
-      snapshot.forEach((childSnapshot) => {
-        habits.push({
-          id: childSnapshot.key,
-          ...childSnapshot.val()
-        });
-      });
+              snapshot.forEach((childSnapshot) => {
+                habits.push({
+                  id: childSnapshot.key,
+                  ...childSnapshot.val()
+                  });
+                });
       dispatch(setHabits(habits));
     });
   };

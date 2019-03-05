@@ -31,6 +31,17 @@ export const removeHabit = ({id} = {}) => ({
   id
 });
 
+export const startRemoveHabits = ({id} = {}) => {
+  return dispatch => {
+    database
+    .ref(`habits/${id}`)
+    .remove()
+    .then(() => {
+      dispatch(removeHabit({ id }));
+      });
+    };
+  };
+
 export const editHabit = (id, updates) => ({
   type: 'EDIT_HABIT',
   id,

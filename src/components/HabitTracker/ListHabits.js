@@ -2,7 +2,7 @@ import React from 'react';
 import ListTimesOfHabit from './ListTimesOfHabit';
 import { connect } from 'react-redux';
 import { visibleHabits } from '../../reducers/rootReducers';
-import { removeHabit } from '../../reducers/habitsReducers';
+import { removeHabit, startRemoveHabits } from '../../reducers/habitsReducers';
 
 
 const ListHabits = ({habits, dispatch}) => {
@@ -13,7 +13,7 @@ const ListHabits = ({habits, dispatch}) => {
                 {habit.name}
             </h1>
             <button onClick={() => {
-                        dispatch(removeHabit({id: habit.id}))
+                        dispatch(startRemoveHabits({id: habit.id}))
                     }}>Remove</button>
             <div>
                 Date of starting: {habit.date}
@@ -23,7 +23,7 @@ const ListHabits = ({habits, dispatch}) => {
             </div>
             <div>
                 Ready:
-              <ListTimesOfHabit times={habit.timesRepeat} /> 
+              <ListTimesOfHabit times={habit.timesRepeat} />
             </div>
             </div>
 

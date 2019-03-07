@@ -56,13 +56,15 @@ export const startMakeHabit = (id, habitId = {}) => {
   return dispatch => {
     database
     .ref(`habits/${habitId}`)
-    .on('value', (snapshot) => {
-
-          console.log(snapshot.val());
-        })
-    // .then(() => {
-    //   dispatch(removeHabit({ id }));
-    //   });
+    .child("timesRepeat")
+    .orderByChild('id')
+    .equalTo(id)
+    .once("child_added", function(snapshot) {
+      snapshot.ref.update({ ready: true })
+    })
+    .then(() => {
+      dispatch(removeHabit(id));
+    });
   };
 };
 

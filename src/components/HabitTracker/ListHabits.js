@@ -23,7 +23,7 @@ const ListHabits = ({habits, dispatch}) => {
             </div>
             <div>
                 Ready:
-              <ListTimesOfHabit times={habit.timesRepeat} />
+              <ListTimesOfHabit habitId={habit.id} times={habit.timesRepeat} />
             </div>
             </div>
 

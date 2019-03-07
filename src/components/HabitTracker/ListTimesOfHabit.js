@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { makeHabit } from '../../reducers/habitsReducers';
+import { startMakeHabit } from '../../reducers/habitsReducers';
 import { visibleHabits } from '../../reducers/rootReducers';
 
 class ListTimesOfHabit extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      key: this.props.key
+    }
   };
-    handleClick = (id) => {
-        this.props.dispatch(makeHabit(id));
+    handleClick = (id, key) => {
+        this.props.dispatch(startMakeHabit(id, key));
     }
     render (){
         const timesList = this.props.times.map(time => {
@@ -21,7 +24,7 @@ class ListTimesOfHabit extends Component {
                     ready: {time.ready ? 'yes' :'no'}
                     {time.ready ? ''
                     :
-                    <button  onClick={() => this.handleClick(time.id)}>
+                    <button  onClick={() => this.handleClick(time.id, this.props.habitId)}>
                         Make ready
                     </button>
                     }

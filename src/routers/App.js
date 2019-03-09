@@ -7,6 +7,7 @@ import ToDoList from '../components/ToDoList/ToDoList';
 import MealPlanner from '../components/MealPlanner/MealPlanner';
 import MonthPlanner from '../components/MonthPlanner/MonthPlanner';
 import Header from '../components/Header/Header';
+import LoginPage from '../components/Login/LoginPage';
 
 
 const App = () => (
@@ -14,7 +15,8 @@ const App = () => (
     <div>
       <Header />
       <Switch>
-        <Route path="/" component={DashboardPage} exact={true} />
+        <Route path="/" component={LoginPage} exact={true} />
+        <Route path="/dashboard" component={DashboardPage} exact={true} />
         <Route path="/to-do-list" component={ToDoList} />
         <Route path="/habit-tracker" component={HabitTracker} />
         <Route path="/meal-planner" component={MealPlanner} />

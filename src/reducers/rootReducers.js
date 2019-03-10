@@ -1,7 +1,7 @@
+import { combineReducers } from 'redux';
 import habitsReducers from './habitsReducers';
 import filtersReducers from './filtersReducers';
-import { combineReducers } from 'redux';
-
+import authReducer from './auth';
 
 export const visibleHabits = (habits, {text}) => {
   return habits.filter((habit) => {
@@ -12,5 +12,6 @@ export const visibleHabits = (habits, {text}) => {
 
 export const rootReducers = combineReducers({
   habits: habitsReducers,
-  filters: filtersReducers
+  filters: filtersReducers,
+  auth: authReducer
 });

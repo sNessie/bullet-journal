@@ -9,7 +9,8 @@ export const addHabit = ( habit ) => ({
 });
 
 export const startAddHabit = (habitData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       name = '',
       date = '',
@@ -17,7 +18,7 @@ export const startAddHabit = (habitData = {}) => {
       timesRepeat = []
     } = habitData;
     const habit = { name, date, times, timesRepeat };
-    database.ref('habits').push(habit).then((ref) => {
+    database.ref(`users/${uid}/habits`).push(habit).then((ref) => {
       dispatch(addHabit({
         id: ref.key,
         ...habit
@@ -32,9 +33,10 @@ export const removeHabit = ({id} = {}) => ({
 });
 
 export const startRemoveHabits = ({id} = {}) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     database
-    .ref(`habits/${id}`)
+    .ref(`users/${uid}/habits/${id}`)
     .remove()
     .then(() => {
       dispatch(removeHabit({ id }));
@@ -53,9 +55,10 @@ export const makeHabit = (id) => ({
 });
 
 export const startMakeHabit = (id, habitId = {}) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     database
-    .ref("habits")
+    .ref(`users/${uid}/habits`)
     .child(`${habitId}/timesRepeat`)
     .orderByChild('id')
     .equalTo(id)
@@ -74,9 +77,10 @@ export const setHabits = (habits) => ({
 });
 
 export const startSetHabits = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     return database
-          .ref('habits')
+          .ref(`users/${uid}/habits`)
           .once('value')
           .then(snapshot => {
               const habits = [];

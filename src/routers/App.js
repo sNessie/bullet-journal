@@ -9,6 +9,7 @@ import MonthPlanner from '../components/MonthPlanner/MonthPlanner';
 import LoginPage from '../components/Login/LoginPage';
 import createHistory from 'history/createBrowserHistory';
 import PrivateRoute from './privateRoute';
+import PublicRoute from './publicRoute';
 
 export const history = createHistory();
 
@@ -16,7 +17,7 @@ const AppRouter = () => (
     <Router history={history}>
     <div>
       <Switch>
-        <Route path="/" component={LoginPage} exact={true} />
+        <PublicRoute path="/" component={LoginPage} exact={true} />
         <PrivateRoute path="/dashboard" component={DashboardPage} exact={true} />
         <PrivateRoute path="/to-do-list" component={ToDoList} />
         <PrivateRoute path="/habit-tracker" component={HabitTracker} />

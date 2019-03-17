@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTextFilter } from '../../reducers/filtersReducers';
+import {Row, Input, Icon} from 'react-materialize';
 
 
 const FiltersForm = (props) => {
     return (
-        <div>
-        <input
+        <Row>
+        <Input
+            s={4}
+            label="Search"
             type="text"
-            placeholder="search"
             value={props.filters.text}
             onChange={(e) => {
                 props.dispatch(setTextFilter(e.target.value))
             }}
-            />
-    </div>
+            >
+          <Icon>search</Icon>
+        </Input>
+    </Row>
 )};
 
 const mapStateToProps = (state) => {

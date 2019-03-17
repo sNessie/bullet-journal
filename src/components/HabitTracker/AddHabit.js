@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import uuid from 'uuid';
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
+// import { SingleDatePicker } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { connect } from 'react-redux';
 import { startAddHabit } from '../../reducers/habitsReducers';
+import {Button, Icon, Row, Input} from 'react-materialize';
 
 
 
@@ -44,7 +45,7 @@ class AddHabbit extends Component {
     } else {
       const newHabit={
         name: this.state.name,
-        date: this.state.date.format('YYYY-MM-DD'),
+        date: this.state.date,
         times: this.state.times,
         timesRepeat: this.generateTimesRepeat(this.state.date, this.state.times)
       };
@@ -53,7 +54,7 @@ class AddHabbit extends Component {
     }
       this.setState({
         name: '',
-        date: moment(),
+        date: '',
         times: 0,
         timesRepeat: [],
         errorName: '',
@@ -61,13 +62,10 @@ class AddHabbit extends Component {
       });
 };
 
-  onDateChange = (date) => {
-    this.setState(() => ({date}));
+  onDateChange = (date, value) => {
+    this.setState(() => ({date: value}));
   };
 
-  onFocusChange = ({ focused }) => {
-    this.setState(() => ({ focused }))
-  }
 
 generateTimesRepeat = (date, times) => {
   let startDate = new Date(date);
@@ -88,37 +86,39 @@ generateTimesRepeat = (date, times) => {
     const {name, times} = this.state;
   return (
     <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text"
-              required
-              placeholder="name"
-              name="name"
-              value={name}
-              autoFocus
-              onChange={this.handleChange} />
-            <label>
-              Start date:
-              <SingleDatePicker
-                  date={this.state.date}
-                  onDateChange = {this.onDateChange}
-                  focused = {this.state.focused}
-                  onFocusChange={this.onFocusChange}
-                  numberOfMonths={1}
-                  id="123"
-                  />
-            </label>
-            <label>
-              Days repeat:
-              <input type="number"
-                required
-                min="1"
-                max="100"
-                name="times"
-                value={times}
-                onChange={this.onTimesChange} />
-            </label>
-            <button type="submit">+</button>
-          </form>
+    <Row>
+      <form onSubmit={this.handleSubmit}>
+        <Input
+          s={3}
+          label="Name"
+          type="text"
+          validate
+          required
+          name="name"
+          value={name}
+          autoFocus
+          onChange={this.handleChange}
+        />
+        <Input
+          s={3}
+          label="Date of start"
+          name='on'
+          type='date'
+          onChange={this.onDateChange}
+        />
+        <Input
+          s={3}
+          label="Times to repeat"
+          type="number"
+          validate
+          required
+          name="Times to repeat"
+          value={times}
+          onChange={this.onTimesChange}
+        />
+        <Button floating large className='red' waves='light' icon='add' type="submit" />
+      </form>
+    </Row>
           <div>{this.state.errorName} {this.state.errorTimes}</div>
     </div>
   )

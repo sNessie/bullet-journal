@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setTextFilter } from '../../reducers/filtersReducers';
-import {Row, Input, Icon} from 'react-materialize';
+import {Row, Input, Icon, Col} from 'react-materialize';
 
 
 const FiltersForm = (props) => {
     return (
-        <Row>
         <Input
             s={4}
             label="Search"
@@ -18,7 +17,6 @@ const FiltersForm = (props) => {
             >
           <Icon>search</Icon>
         </Input>
-    </Row>
 )};
 
 const mapStateToProps = (state) => {

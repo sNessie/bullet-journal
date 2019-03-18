@@ -85,11 +85,10 @@ generateTimesRepeat = (date, times) => {
   render(){
     const {name, times} = this.state;
   return (
-    <div>
     <Row>
       <form onSubmit={this.handleSubmit}>
         <Input
-          s={3}
+          s={4}
           label="Name"
           type="text"
           validate
@@ -116,11 +115,10 @@ generateTimesRepeat = (date, times) => {
           value={times}
           onChange={this.onTimesChange}
         />
-        <Button floating large className='red' waves='light' icon='add' type="submit" />
+        <Button floating large className='red right' waves='light' icon='add' type="submit"  />
       </form>
+      <div>{this.state.errorName} {this.state.errorTimes}</div>
     </Row>
-          <div>{this.state.errorName} {this.state.errorTimes}</div>
-    </div>
   )
 }}
 

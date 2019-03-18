@@ -3,6 +3,8 @@ import AddHabit from './AddHabit';
 import uuid from 'uuid';
 import ListHabits from './ListHabits';
 import FiltersForm from "./FiltersForm";
+import {Button, Row, Col } from 'react-materialize';
+
 
 
 class HabitTracker extends Component {
@@ -43,14 +45,18 @@ class HabitTracker extends Component {
   render (){
     const { showAddForm } = this.state;
     return(
-      <div>
-        <button onClick={this.showForm}>
-        {showAddForm ? 'Hide add form' :'Show add form'}
-        </button>
-        <FiltersForm />
-        {showAddForm ? <AddHabit showForm={this.showForm} /> : null }
-        <ListHabits  />
-      </div>
+      <Row className="container">
+          <Row>
+            <FiltersForm />
+            <Col className="right">
+                <Button waves='light' onClick={this.showForm} >
+                    {showAddForm ? 'Hide add form' :'Show add form'}
+                </Button>
+              </Col>
+          </Row>
+            {showAddForm ? <AddHabit showForm={this.showForm} /> : null }
+            <ListHabits  />
+      </Row>
     )
   }
 };

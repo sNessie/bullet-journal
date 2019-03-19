@@ -6,9 +6,6 @@ import { Row, Button, Col } from 'react-materialize';
 import './style.css';
 
 class ListTimesOfHabit extends Component {
-  constructor(props) {
-    super(props);
-  };
     handleClick = (id, key) => {
         this.props.dispatch(startMakeHabit(id, key));
     }
@@ -19,15 +16,11 @@ class ListTimesOfHabit extends Component {
 					<span className="hidden">
 						{time.date}
 					</span>
-                    {time.ready
-					?
-						<Button floating small className='red' icon='done' waves='light' disabled />
-                    :
-                    	<Button floating small className='red' waves='light' icon='done_outline'
-							onClick={() => this.handleClick(time.id, this.props.habitId)}
+					<Button floating small className='red' waves='light'
+						icon={time.ready ? 'done' : 'done_outline'}
+                    	disabled={time.ready ? true : false}
+						onClick={() => this.handleClick(time.id, this.props.habitId)}
 					/>
-
-                    }
             </Col>
             )
         });

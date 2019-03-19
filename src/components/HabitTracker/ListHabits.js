@@ -3,14 +3,15 @@ import ListTimesOfHabit from './ListTimesOfHabit';
 import { connect } from 'react-redux';
 import { visibleHabits } from '../../reducers/rootReducers';
 import { removeHabit, startRemoveHabits } from '../../reducers/habitsReducers';
-import {Row, Input, Icon, Card, CardTitle} from 'react-materialize';
+import {Row, Card, CardTitle, Col} from 'react-materialize';
 
 
 
 const ListHabits = ({habits, dispatch}) => {
     const habitsList = habits.map(habit => {
         return (
-            <Card className='col s4' key={habit.id}
+			<Col s={4}>
+            <Card className='s3' key={habit.id}
 				header={<CardTitle image='img/sample-1.jpg'>{habit.name}</CardTitle>}
 			 	actions={<button onClick={() => {
                          dispatch(startRemoveHabits({id: habit.id}))
@@ -28,6 +29,7 @@ const ListHabits = ({habits, dispatch}) => {
               	<ListTimesOfHabit habitId={habit.id} times={habit.timesRepeat} />
             </div>
             </Card>
+			</Col>
 
         );
     })

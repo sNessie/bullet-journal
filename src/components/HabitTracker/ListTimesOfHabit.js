@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { startMakeHabit } from '../../reducers/habitsReducers';
 import { visibleHabits } from '../../reducers/rootReducers';
+import { Row, Button, Col } from 'react-materialize';
+import './style.css';
 
 class ListTimesOfHabit extends Component {
   constructor(props) {
@@ -13,26 +15,26 @@ class ListTimesOfHabit extends Component {
     render (){
         const timesList = this.props.times.map(time => {
             return(
-            <div key={time.id}>
-                <div>
-                    date: {time.date}
-                </div>
-                <div>
-                    ready: {time.ready ? 'yes' :'no'}
-                    {time.ready ? ''
+            <Col s={2} key={time.id} className="habit">
+					<span className="hidden">
+						{time.date}
+					</span>
+                    {time.ready
+					?
+						<Button floating small className='red' icon='done' waves='light' disabled />
                     :
-                    <button  onClick={() => this.handleClick(time.id, this.props.habitId)}>
-                        Make ready
-                    </button>
+                    	<Button floating small className='red' waves='light' icon='done_outline'
+							onClick={() => this.handleClick(time.id, this.props.habitId)}
+					/>
+
                     }
-                </div>
-            </div>
+            </Col>
             )
         });
         return (
-            <div>
+            <Row>
                 {timesList}
-            </div>
+            </Row>
         )
 
     }

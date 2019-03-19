@@ -3,36 +3,38 @@ import ListTimesOfHabit from './ListTimesOfHabit';
 import { connect } from 'react-redux';
 import { visibleHabits } from '../../reducers/rootReducers';
 import { removeHabit, startRemoveHabits } from '../../reducers/habitsReducers';
+import {Row, Input, Icon, Card, CardTitle} from 'react-materialize';
+
 
 
 const ListHabits = ({habits, dispatch}) => {
     const habitsList = habits.map(habit => {
         return (
-            <div key={habit.id}>
-            <h1>
-                {habit.name}
-            </h1>
-            <button onClick={() => {
-                        dispatch(startRemoveHabits({id: habit.id}))
-                    }}>Remove</button>
+            <Card className='col s4' key={habit.id}
+				header={<CardTitle image='img/sample-1.jpg'>{habit.name}</CardTitle>}
+			 	actions={<button onClick={() => {
+                         dispatch(startRemoveHabits({id: habit.id}))
+                     	}}>Remove</button>}>
             <div>
-                Date of starting: {habit.date}
-            </div>
-            <div>
-                Times to repeat: {habit.times}
+				<span className="blue-text">Date of starting: </span>
+				 {habit.date}
             </div>
             <div>
-                Ready:
-              <ListTimesOfHabit habitId={habit.id} times={habit.timesRepeat} />
+				<span className="blue-text">Times to repeat: </span>
+				{habit.times}
             </div>
+            <div>
+                <span className="blue-text">Ready:</span>
+              	<ListTimesOfHabit habitId={habit.id} times={habit.timesRepeat} />
             </div>
+            </Card>
 
         );
     })
     return (
-        <div>
+        <Row>
             {habitsList}
-        </div>
+        </Row>
     )
 
 };

@@ -6,17 +6,21 @@ import { Row, Button, Col } from 'react-materialize';
 import './style.css';
 
 class ListTimesOfHabit extends Component {
+	constructor(props) {
+    	super(props);
+  	};
     handleClick = (id, key) => {
         this.props.dispatch(startMakeHabit(id, key));
     }
     render (){
+		const today = new Date();
         const timesList = this.props.times.map(time => {
             return(
             <Col s={2} key={time.id} className="habit">
 					<span className="hidden">
 						{time.date}
 					</span>
-					<Button floating small className='red' waves='light'
+					<Button floating small="true" className='red' waves='light'
 						icon={time.ready ? 'done' : 'done_outline'}
                     	disabled={time.ready ? true : false}
 						onClick={() => this.handleClick(time.id, this.props.habitId)}

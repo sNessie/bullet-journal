@@ -10,12 +10,12 @@ import {Row, Card, CardTitle, Col} from 'react-materialize';
 const ListHabits = ({habits, dispatch}) => {
     const habitsList = habits.map(habit => {
         return (
-			<Col s={4}>
-            <Card className='s3' key={habit.id}
+			<Col s={4} key={habit.id}>
+            <Card className='s3' 
 				header={<CardTitle image='img/sample-1.jpg'>{habit.name}</CardTitle>}
-			 	actions={<button onClick={() => {
+			 	actions={[<button onClick={() => {
                          dispatch(startRemoveHabits({id: habit.id}))
-                     	}}>Remove</button>}>
+					 }}>Remove</button>]}>
             <div>
 				<span className="blue-text">Date of starting: </span>
 				 {habit.date}

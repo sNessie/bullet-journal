@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { setTextFilter } from "../../reducers/filtersReducers";
 import { Input, Icon } from "react-materialize";
+import PropTypes from "prop-types";
 
 const FiltersForm = props => {
   return (
@@ -19,6 +20,10 @@ const FiltersForm = props => {
   );
 };
 
+FiltersForm.propTypes = {
+  filters: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
 const mapStateToProps = state => {
   return {
     filters: state.filters

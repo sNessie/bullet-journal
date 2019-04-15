@@ -3,17 +3,19 @@ import { connect } from "react-redux";
 import { setTextFilter } from "../../reducers/filtersReducers";
 import { Input, Icon } from "react-materialize";
 import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 
-const FiltersForm = props => {
+const FiltersForm = ({ filters, actions }) => {
+  const handleChange = e => {
+    actions.setTextFilter(e.target.value);
+  };
   return (
     <Input
       s={4}
       label="Search"
       type="text"
-      value={props.filters.text}
-      onChange={e => {
-        props.dispatch(setTextFilter(e.target.value));
-      }}
+      value={filters.text}
+      onChange={handleChange}
     >
       <Icon>search</Icon>
     </Input>
@@ -21,8 +23,8 @@ const FiltersForm = props => {
 };
 
 FiltersForm.propTypes = {
-  filters: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  filters: PropTypes.object.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
@@ -31,4 +33,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(FiltersForm);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      setTextFilter: bindActionCreators(setTextFilter, dispatch)
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FiltersForm);

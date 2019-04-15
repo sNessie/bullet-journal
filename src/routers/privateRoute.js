@@ -1,27 +1,32 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
-import Header from '../components/Header/Header';
+import React from "react";
+import { connect } from "react-redux";
+import { Route, Redirect } from "react-router-dom";
+import Header from "../components/Header/Header";
+import PropTypes from "prop-types";
 
-export const PrivateRoute = ( {
-  isAuthentticated,
-  component: Component,
-  ...rest
-} ) => (
-  <Route {...rest} component={ (props) => (
-    isAuthentticated ? (
-      <div>
-        <Header />
-        <Component {...props} />
-      </div>
-    ) : (
-      <Redirect to="/" />
-    )
-  )} />
+const PrivateRoute = ({ isAuthentticated, component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    component={props =>
+      isAuthentticated ? (
+        <div>
+          <Header />
+          <Component {...props} />
+        </div>
+      ) : (
+        <Redirect to="/" />
+      )
+    }
+  />
 );
 
-const mapStateToProps = (state ) => ({
+PrivateRoute.propTypes = {
+  isAuthentticated: PropTypes.bool.isRequired,
+  component: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
   isAuthentticated: !!state.auth.uid
-})
+});
 
 export default connect(mapStateToProps)(PrivateRoute);

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { visibleHabits } from "../../reducers/rootReducers";
 import { startRemoveHabits } from "../../reducers/habitsReducers";
 import { Row, Card, CardTitle, Col } from "react-materialize";
+import PropTypes from "prop-types";
 
 const ListHabits = ({ habits, dispatch }) => {
   const habitsList = habits.map(habit => {
@@ -14,6 +15,7 @@ const ListHabits = ({ habits, dispatch }) => {
           header={<CardTitle image="img/sample-1.jpg">{habit.name}</CardTitle>}
           actions={[
             <button
+              key={habit.id}
               onClick={() => {
                 dispatch(startRemoveHabits({ id: habit.id }));
               }}
@@ -40,6 +42,12 @@ const ListHabits = ({ habits, dispatch }) => {
   });
   return <Row>{habitsList}</Row>;
 };
+
+ListHabits.propTypes = {
+  habits: PropTypes.array.isRequired,
+  dispatch: PropTypes.func.isRequired
+};
+
 const mapStateToProps = state => {
   return {
     habits: visibleHabits(state.habits, state.filters)

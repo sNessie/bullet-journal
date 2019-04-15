@@ -24,6 +24,7 @@ FiltersForm.propTypes = {
   filters: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 };
+
 const mapStateToProps = state => {
   return {
     filters: state.filters

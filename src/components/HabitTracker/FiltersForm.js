@@ -33,13 +33,13 @@ const mapStateToProps = state => {
   };
 };
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     actions: {
       setTextFilter: bindActionCreators(setTextFilter, dispatch)
     }
   };
-}
+};
 
 export default connect(
   mapStateToProps,

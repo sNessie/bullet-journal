@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import uuid from "uuid";
-import moment from "moment";
+import uuid from "uuid";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { connect } from "react-redux";
@@ -15,20 +14,36 @@ const AddHabbit = () => {
     times: "",
     timesRepeat: []
   });
-  // const [date, setDate] = useState("");
-  // const [timesRepeat, setTimesRepeat] = useState([]);
   // const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setHabit(prevCourse => ({
-      ...prevCourse,
-      [name]: name === "times25" ? parseInt(value, 10) : value
+    setHabit(prevHabit => ({
+      ...prevHabit,
+      [name]: value,
+      timesRepeat: generateTimesRepeat(habit.date, habit.times)
     }));
   }
   function handleSubmit(e) {
     e.preventDefault();
     console.log(habit);
+  }
+
+  function generateTimesRepeat(date, times) {
+    let startDate = new Date(date);
+    times = parseInt(times, 10);
+    let timesRepeat = [];
+    let id;
+    for (let i = 0; i <= times; i++) {
+      id = uuid();
+      startDate.setDate(startDate.getDate() + 1);
+      timesRepeat.push({
+        id: id,
+        date: startDate.toISOString().substring(0, 10),
+        ready: false
+      });
+    }
+    return timesRepeat;
   }
   return (
     <Row>
@@ -56,7 +71,7 @@ const AddHabbit = () => {
           label="Times to repeat"
           type="number"
           validate
-          // required
+          required
           name="times"
           value={habit.times}
           onChange={handleChange}

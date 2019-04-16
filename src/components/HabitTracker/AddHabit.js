@@ -3,17 +3,12 @@ import uuid from "uuid";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { connect } from "react-redux";
-// import { startAddHabit } from "../../reducers/habitsReducers";
+import { startAddHabit } from "../../reducers/habitsReducers";
 import { Button, Row, Input } from "react-materialize";
 import PropTypes from "prop-types";
 
-const AddHabbit = () => {
-  const [habit, setHabit] = useState({
-    name: "",
-    date: "",
-    times: "",
-    timesRepeat: []
-  });
+const AddHabbit = props => {
+  const [habit, setHabit] = useState({});
   // const [errors, setErrors] = useState({});
 
   function handleChange(e) {
@@ -26,14 +21,17 @@ const AddHabbit = () => {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(habit);
+    // to do > error handle
+    props.dispatch(startAddHabit(habit));
+    props.showForm();
   }
 
   function generateTimesRepeat(date, times) {
-    let startDate = new Date(date);
     times = parseInt(times, 10);
+    let startDate = new Date(date);
     let timesRepeat = [];
     let id;
+    // to fix: problem with times 1
     for (let i = 0; i <= times; i++) {
       id = uuid();
       startDate.setDate(startDate.getDate() + 1);

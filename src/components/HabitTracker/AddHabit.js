@@ -15,8 +15,7 @@ const AddHabbit = props => {
     const { name, value } = e.target;
     setHabit(prevHabit => ({
       ...prevHabit,
-      [name]: value,
-      timesRepeat: generateTimesRepeat(habit.date, habit.times)
+      [name]: value
     }));
   }
   function handleSubmit(e) {
@@ -26,13 +25,14 @@ const AddHabbit = props => {
     props.showForm();
   }
 
-  function generateTimesRepeat(date, times) {
-    times = parseInt(times, 10);
-    let startDate = new Date(date);
+  function generateTimesRepeat(e) {
+    const { name, value } = e.target;
+    let times = parseInt(value, 10);
+    let startDate = new Date(habit.date);
     let timesRepeat = [];
     let id;
-    // to fix: problem with times 1
-    for (let i = 0; i <= times; i++) {
+    for (let i = 0; i < times; i++) {
+      console.log(i);
       id = uuid();
       startDate.setDate(startDate.getDate() + 1);
       timesRepeat.push({
@@ -41,7 +41,11 @@ const AddHabbit = props => {
         ready: false
       });
     }
-    return timesRepeat;
+    setHabit(prevHabit => ({
+      ...prevHabit,
+      [name]: value,
+      timesRepeat
+    }));
   }
   return (
     <Row>
@@ -72,7 +76,7 @@ const AddHabbit = props => {
           required
           name="times"
           value={habit.times}
-          onChange={handleChange}
+          onChange={generateTimesRepeat}
         />
         <Button
           floating

@@ -10,9 +10,13 @@ import PropTypes from "prop-types";
 const AddHabbit = props => {
   const [habit, setHabit] = useState({});
   const [errors, setErrors] = useState({});
+  const [isDate, setIsDate] = useState(true);
 
   function handleChange(e) {
     const { name, value } = e.target;
+    if (name === "date") {
+      setIsDate(false);
+    }
     setHabit(prevHabit => ({
       ...prevHabit,
       [name]: value
@@ -26,13 +30,11 @@ const AddHabbit = props => {
   }
 
   function formIsValid() {
-    const { title, date, times } = habit;
+    const { name, date, times } = habit;
     const errors = {};
-
-    if (!title) errors.title = "Title is required.";
+    if (!name) errors.name = "Name is required";
     if (!date) errors.date = "Date is required";
     if (!times) errors.times = "Times is required";
-
     setErrors(errors);
     return Object.keys(errors).length === 0;
   }
@@ -92,6 +94,7 @@ const AddHabbit = props => {
           name="times"
           value={habit.times}
           onChange={generateTimesRepeat}
+          disabled={isDate}
         />
         <Button
           floating

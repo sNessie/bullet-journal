@@ -8,7 +8,12 @@ import { Button, Row, Input } from "react-materialize";
 import PropTypes from "prop-types";
 
 const AddHabbit = props => {
-  const [habit, setHabit] = useState({});
+  const [habit, setHabit] = useState({
+    name: "",
+    date: "",
+    times: "",
+    timesRepeat: []
+  });
   const [errors, setErrors] = useState({});
   const [isDate, setIsDate] = useState(true);
 

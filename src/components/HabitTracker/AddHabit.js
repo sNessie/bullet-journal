@@ -5,9 +5,10 @@ import "react-dates/lib/css/_datepicker.css";
 import { connect } from "react-redux";
 import { startAddHabit } from "../../reducers/habitsReducers";
 import { Button, Row, Input } from "react-materialize";
+import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
-const AddHabbit = props => {
+const AddHabbit = ({ showForm, actions }) => {
   const [habit, setHabit] = useState({
     name: "",
     date: "",
@@ -30,8 +31,8 @@ const AddHabbit = props => {
   function handleSubmit(e) {
     e.preventDefault();
     if (!formIsValid()) return;
-    props.dispatch(startAddHabit(habit));
-    props.showForm();
+    actions.startAddHabit(habit);
+    showForm();
   }
 
   function formIsValid() {
@@ -116,7 +117,18 @@ const AddHabbit = props => {
 
 AddHabbit.propTypes = {
   showForm: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
-export default connect()(AddHabbit);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: {
+      startAddHabit: bindActionCreators(startAddHabit, dispatch)
+    }
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddHabbit);

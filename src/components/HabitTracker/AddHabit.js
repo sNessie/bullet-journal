@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 
 const AddHabbit = props => {
   const [habit, setHabit] = useState({});
-  // const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -20,9 +20,21 @@ const AddHabbit = props => {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    // to do > error handle
+    if (!formIsValid()) return;
     props.dispatch(startAddHabit(habit));
     props.showForm();
+  }
+
+  function formIsValid() {
+    const { title, date, times } = habit;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required.";
+    if (!date) errors.date = "Date is required";
+    if (!times) errors.times = "Times is required";
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
   }
 
   function generateTimesRepeat(e) {
@@ -32,7 +44,6 @@ const AddHabbit = props => {
     let timesRepeat = [];
     let id;
     for (let i = 0; i < times; i++) {
-      console.log(i);
       id = uuid();
       startDate.setDate(startDate.getDate() + 1);
       timesRepeat.push({
@@ -50,12 +61,15 @@ const AddHabbit = props => {
   return (
     <Row>
       <form onSubmit={handleSubmit}>
+        <div>{errors.title}</div>
+        <div>{errors.date}</div>
+        <div>{errors.times}</div>
         <Input
           s={4}
           label="Name"
           type="text"
           validate
-          required
+          // required
           name="name"
           value={habit.name}
           autoFocus
@@ -65,6 +79,7 @@ const AddHabbit = props => {
           s={3}
           label="Date of start"
           name="date"
+          // required
           type="date"
           onChange={handleChange}
         />
@@ -73,7 +88,7 @@ const AddHabbit = props => {
           label="Times to repeat"
           type="number"
           validate
-          required
+          // required
           name="times"
           value={habit.times}
           onChange={generateTimesRepeat}
@@ -87,7 +102,6 @@ const AddHabbit = props => {
           type="submit"
         />
       </form>
-      {/* <div>{errors}</div> */}
     </Row>
   );
 };

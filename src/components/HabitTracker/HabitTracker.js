@@ -2,29 +2,26 @@ import React, { useState } from "react";
 import AddHabit from "./AddHabit";
 import ListHabits from "./ListHabits";
 import FiltersForm from "./FiltersForm";
-import { Button, Row, Col } from "react-materialize";
 
 const HabitTracker = () => {
   const [showAddForm, setShowAddForm] = useState(false);
+
+  function hideAddForm() {
+    setShowAddForm(false);
+  }
   return (
-    <Row className="container">
-      <Row>
-        <FiltersForm />
-        <Col className="right">
-          {showAddForm ? (
-            <Button waves="light" onClick={() => setShowAddForm(false)}>
-              Hide add form
-            </Button>
-          ) : (
-            <Button waves="light" onClick={() => setShowAddForm(true)}>
-              Show add form
-            </Button>
-          )}
-        </Col>
-      </Row>
-      {showAddForm ? <AddHabit showForm={showAddForm} /> : null}
+    <div>
+      <FiltersForm />
+      <div>
+        {showAddForm ? (
+          <button onClick={() => setShowAddForm(false)}>Hide add form</button>
+        ) : (
+          <button onClick={() => setShowAddForm(true)}>Show add form</button>
+        )}
+      </div>
+      {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
       <ListHabits />
-    </Row>
+    </div>
   );
 };
 

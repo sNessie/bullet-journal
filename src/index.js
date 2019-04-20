@@ -7,8 +7,6 @@ import AppRouter, { history } from "./routers/App";
 import configureStore from "./config/configureStore";
 import { startSetHabits } from "./reducers/habitsReducers";
 import { login, logout } from "./reducers/auth";
-import "react-dates/lib/css/_datepicker.css";
-import "normalize.css/normalize.css";
 import { firebase } from "./config/fbConfig";
 
 const store = configureStore();

@@ -1,28 +1,22 @@
 import React, { useState } from "react";
 import uuid from "uuid";
-import "react-dates/initialize";
-import "react-dates/lib/css/_datepicker.css";
 import { connect } from "react-redux";
 import { startAddHabit } from "../../reducers/habitsReducers";
-import { Button, Row, Input } from "react-materialize";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 
-const AddHabbit = ({ showForm, actions }) => {
+const AddHabbit = ({ hideAddForm, actions }) => {
+  const today = new Date().toISOString().split("T")[0];
   const [habit, setHabit] = useState({
     name: "",
-    date: "",
+    date: new Date().toISOString().substring(0, 10),
     times: "",
     timesRepeat: []
   });
   const [errors, setErrors] = useState({});
-  const [isDate, setIsDate] = useState(true);
 
   function handleChange(e) {
     const { name, value } = e.target;
-    if (name === "date") {
-      setIsDate(false);
-    }
     setHabit(prevHabit => ({
       ...prevHabit,
       [name]: value
@@ -32,7 +26,7 @@ const AddHabbit = ({ showForm, actions }) => {
     e.preventDefault();
     if (!formIsValid()) return;
     actions.startAddHabit(habit);
-    showForm();
+    hideAddForm();
   }
 
   function formIsValid() {
@@ -67,56 +61,44 @@ const AddHabbit = ({ showForm, actions }) => {
     }));
   }
   return (
-    <Row>
+    <div>
       <form onSubmit={handleSubmit}>
         <div>{errors.title}</div>
         <div>{errors.date}</div>
         <div>{errors.times}</div>
-        <Input
-          s={4}
-          label="Name"
+        <input
           type="text"
           validate
-          // required
+          required
           name="name"
           value={habit.name}
           autoFocus
           onChange={handleChange}
         />
-        <Input
-          s={3}
-          label="Date of start"
+        <input
           name="date"
-          // required
+          min={today}
+          required
           type="date"
+          value={habit.date}
           onChange={handleChange}
         />
-        <Input
-          s={3}
-          label="Times to repeat"
+        <input
           type="number"
           validate
-          // required
+          required
           name="times"
           value={habit.times}
           onChange={generateTimesRepeat}
-          disabled={isDate}
         />
-        <Button
-          floating
-          large
-          className="red right"
-          waves="light"
-          icon="add"
-          type="submit"
-        />
+        <button type="submit">Add</button>
       </form>
-    </Row>
+    </div>
   );
 };
 
 AddHabbit.propTypes = {
-  showForm: PropTypes.func.isRequired,
+  hideAddForm: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired
 };
 

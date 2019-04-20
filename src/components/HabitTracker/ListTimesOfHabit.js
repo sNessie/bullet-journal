@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { startMakeHabit } from "../../reducers/habitsReducers";
 import { visibleHabits } from "../../reducers/rootReducers";
-import { Row, Button, Col } from "react-materialize";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import "./style.css";
@@ -13,21 +12,18 @@ const ListTimesOfHabit = ({ habitId, times, actions }) => {
   };
   const timesList = times.map(time => {
     return (
-      <Col s={2} key={time.id} className="habit">
+      <div key={time.id} className="habit">
         <span className="hidden">{time.date}</span>
-        <Button
-          floating
-          small="true"
-          className="red"
-          waves="light"
-          icon={time.ready ? "done" : "done_outline"}
+        <button
           disabled={time.ready ? true : false}
           onClick={() => handleClick(time.id, habitId)}
-        />
-      </Col>
+        >
+          {time.ready ? "true" : "false"}
+        </button>
+      </div>
     );
   });
-  return <Row>{timesList}</Row>;
+  return <div>{timesList}</div>;
 };
 
 ListTimesOfHabit.propTypes = {

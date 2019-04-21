@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Input = styled.input`
   padding: 1.5rem 2rem;
-  border-radius: 2px;
+  border-radius: 1.5rem;
   background-color: white;
   border: none;
   border-bottom: 3px solid transparent;

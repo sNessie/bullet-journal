@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddHabit from "./AddHabit";
 import ListHabits from "./ListHabits";
 import FiltersForm from "./FiltersForm";
+import Layout from "../../layout/Layout";
 
 const HabitTracker = () => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -10,7 +11,7 @@ const HabitTracker = () => {
     setShowAddForm(false);
   }
   return (
-    <div>
+    <Layout>
       <FiltersForm />
       <div>
         {showAddForm ? (
@@ -21,7 +22,7 @@ const HabitTracker = () => {
       </div>
       {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
       <ListHabits />
-    </div>
+    </Layout>
   );
 };
 

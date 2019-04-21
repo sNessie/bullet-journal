@@ -3,12 +3,25 @@ import { connect } from "react-redux";
 import { setTextFilter } from "../../reducers/filtersReducers";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
+import Input from "../../layout/form/Input";
+import Label from "../../layout/form/Label";
+import FormGroup from "../../layout/form/FormGroup";
 
 const FiltersForm = ({ filters, actions }) => {
   const handleChange = e => {
     actions.setTextFilter(e.target.value);
   };
-  return <input type="text" value={filters.text} onChange={handleChange} />;
+  return (
+    <FormGroup>
+      <Input
+        type="text"
+        name="search"
+        value={filters.text}
+        onChange={handleChange}
+      />
+      <Label htmlFor="search">search</Label>
+    </FormGroup>
+  );
 };
 
 FiltersForm.propTypes = {

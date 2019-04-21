@@ -11,13 +11,16 @@ const HabitTracker = () => {
   function hideAddForm() {
     setShowAddForm(false);
   }
+  function addFormShow() {
+    setShowAddForm(true);
+  }
   return (
     <Layout>
       <FiltersForm />
       {showAddForm ? (
-        <Button onClick={() => setShowAddForm(false)}>Hide add form</Button>
+        <Button onClick={hideAddForm}>Hide add form</Button>
       ) : (
-        <Button onClick={() => setShowAddForm(true)}>Show add form</Button>
+        <Button onClick={addFormShow}>Show add form</Button>
       )}
       {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
       <ListHabits />

@@ -1,13 +1,15 @@
 import styled from "styled-components";
+import Button from "../Button";
 
-const Button = styled.button`
-  padding: 0.5rem;
-  margin: 0.5rem;
-  max-width: 200px;
+const ButtonAdd = styled(Button)`
+  padding: 1rem;
+  margin: 2rem;
+  width: 200px;
   border: none;
   background: none;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.primaryLink};
+  border: 1px solid ${({ theme }) => theme.colors.white}
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
   :hover {
     color: ${({ theme }) => theme.colors.white};
@@ -15,4 +17,4 @@ const Button = styled.button`
   }
 `;
 
-export default Button;
+export default ButtonAdd;

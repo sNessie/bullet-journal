@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import { startAddHabit } from "../../reducers/habitsReducers";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
+import InputAdd from "../../layout/habit/InputAdd";
+import FormAdd from "../../layout/habit/FormAdd";
+import FormContent from "../../layout/habit/FormContent";
+import ButtonAdd from "../../layout/habit/ButtonAdd";
 
 const AddHabbit = ({ hideAddForm, actions }) => {
   const today = new Date().toISOString().split("T")[0];
@@ -61,39 +65,41 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     }));
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>{errors.title}</div>
-        <div>{errors.date}</div>
-        <div>{errors.times}</div>
-        <input
-          type="text"
-          validate
-          required
-          name="name"
-          value={habit.name}
-          autoFocus
-          onChange={handleChange}
-        />
-        <input
-          name="date"
-          min={today}
-          required
-          type="date"
-          value={habit.date}
-          onChange={handleChange}
-        />
-        <input
-          type="number"
-          validate
-          required
-          name="times"
-          value={habit.times}
-          onChange={generateTimesRepeat}
-        />
-        <button type="submit">Add</button>
-      </form>
-    </div>
+    <FormAdd>
+      <FormContent>
+        <form onSubmit={handleSubmit}>
+          <div>{errors.title}</div>
+          <div>{errors.date}</div>
+          <div>{errors.times}</div>
+          <InputAdd
+            type="text"
+            validate
+            required
+            name="name"
+            value={habit.name}
+            placeholder="Habit name"
+            onChange={handleChange}
+          />
+          <InputAdd
+            name="date"
+            min={today}
+            required
+            type="date"
+            value={habit.date}
+            onChange={handleChange}
+          />
+          <InputAdd
+            type="number"
+            required
+            name="times"
+            placeholder="TimesRepeat"
+            value={habit.times}
+            onChange={generateTimesRepeat}
+          />
+          <ButtonAdd type="submit">Add</ButtonAdd>
+        </form>
+      </FormContent>
+    </FormAdd>
   );
 };
 

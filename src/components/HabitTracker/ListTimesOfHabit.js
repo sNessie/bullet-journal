@@ -4,7 +4,7 @@ import { startMakeHabit } from "../../reducers/habitsReducers";
 import { visibleHabits } from "../../reducers/rootReducers";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import "./style.css";
+import { ButtonTime, TimeHidden } from "../../layout/habit/ButtonTime";
 
 const ListTimesOfHabit = ({ habitId, times, actions }) => {
   const handleClick = (id, key) => {
@@ -12,15 +12,13 @@ const ListTimesOfHabit = ({ habitId, times, actions }) => {
   };
   const timesList = times.map(time => {
     return (
-      <div key={time.id} className="habit">
-        <span className="hidden">{time.date}</span>
-        <button
-          disabled={time.ready ? true : false}
-          onClick={() => handleClick(time.id, habitId)}
-        >
-          {time.ready ? "true" : "false"}
-        </button>
-      </div>
+      <ButtonTime
+        key={time.id}
+        disabled={time.ready ? true : false}
+        onClick={() => handleClick(time.id, habitId)}
+      >
+        <TimeHidden className="hidden">{time.date}</TimeHidden>
+      </ButtonTime>
     );
   });
   return <div>{timesList}</div>;

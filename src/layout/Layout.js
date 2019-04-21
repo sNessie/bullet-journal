@@ -5,6 +5,8 @@ import { theme } from "./utils/theme";
 const GlobalStyle = createGlobalStyle`
     html {
         font-size: 62.5%;
+        background: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.black};
     }
     body {
         @import url('https://fonts.googleapis.com/css?family=Montserrat');
@@ -19,11 +21,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledWrapper = styled.div`
+  max-width: 120rem;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.black};
 `;
 
 const Layout = ({ children }) => (

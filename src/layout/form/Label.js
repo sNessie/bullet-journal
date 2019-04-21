@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
 const Label = styled.label`
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-left: 2rem;
   position: absolute;
-  top: 0;
-  left: 0;
+  left: 2rem;
+  top: ${props => (props.hasFocus ? "-1rem" : "2rem")};
+  z-index: ${props => (props.hasFocus ? "100" : "-10")};
+  font-size ${props => (props.hasFocus ? "1.2rem" : "1.6rem")};
   transition: all 0.3s;
 `;
 

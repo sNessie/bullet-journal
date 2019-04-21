@@ -3,6 +3,7 @@ import AddHabit from "./AddHabit";
 import ListHabits from "./ListHabits";
 import FiltersForm from "./FiltersForm";
 import Layout from "../../layout/Layout";
+import Button from "../../layout/Button";
 
 const HabitTracker = () => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -13,13 +14,11 @@ const HabitTracker = () => {
   return (
     <Layout>
       <FiltersForm />
-      <div>
-        {showAddForm ? (
-          <button onClick={() => setShowAddForm(false)}>Hide add form</button>
-        ) : (
-          <button onClick={() => setShowAddForm(true)}>Show add form</button>
-        )}
-      </div>
+      {showAddForm ? (
+        <Button onClick={() => setShowAddForm(false)}>Hide add form</Button>
+      ) : (
+        <Button onClick={() => setShowAddForm(true)}>Show add form</Button>
+      )}
       {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
       <ListHabits />
     </Layout>

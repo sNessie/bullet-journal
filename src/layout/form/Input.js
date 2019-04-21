@@ -6,9 +6,11 @@ const Input = styled.input`
   background-color: white;
   border: none;
   border-bottom: 3px solid transparent;
-  width: 20%;
   transition: all 0.3s;
   :focus {
+    ::placeholder {
+      font-size: 0;
+    }
     outline: none;
     box-shadow: 0 1rem 2rem ${({ theme }) => theme.colors.primary};
     border-bottom: 3px solid ${({ theme }) => theme.colors.primaryGreen};

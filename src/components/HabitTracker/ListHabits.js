@@ -8,8 +8,13 @@ import Card from "../../layout/card/Card";
 import ContainerCard from "../../layout/card/ContainerCard";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
+import { toast } from "react-toastify";
 
 const ListHabits = ({ habits, dispatch }) => {
+  function deleteHabit(habit) {
+    dispatch(startRemoveHabits({ id: habit.id }));
+    toast.info("Habit deleted");
+  }
   const habitsList = habits.map(habit => {
     return (
       <Card key={habit.id}>
@@ -18,7 +23,7 @@ const ListHabits = ({ habits, dispatch }) => {
           <Button
             key={habit.id}
             onClick={() => {
-              dispatch(startRemoveHabits({ id: habit.id }));
+              deleteHabit(habit);
             }}
           >
             X

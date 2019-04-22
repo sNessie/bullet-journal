@@ -4,7 +4,6 @@ import Button from "../Button";
 const ButtonAdd = styled(Button)`
   padding: 1rem;
   margin: 2rem;
-  width: 200px;
   border: none;
   background: none;
   cursor: pointer;

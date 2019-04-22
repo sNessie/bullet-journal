@@ -8,6 +8,7 @@ import InputAdd from "../../layout/habit/InputAdd";
 import FormAdd from "../../layout/habit/FormAdd";
 import FormContent from "../../layout/habit/FormContent";
 import ButtonAdd from "../../layout/habit/ButtonAdd";
+import { LeftContainer } from "../../layout/Container";
 import { toast } from "react-toastify";
 
 const AddHabbit = ({ hideAddForm, actions }) => {
@@ -18,7 +19,6 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     times: "",
     timesRepeat: []
   });
-  const [errors, setErrors] = useState({});
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -41,7 +41,6 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     if (!name) errors.name = toast.error("Name is required");
     if (!date) errors.date = toast.error("Date is required");
     if (!times) errors.times = toast.error("Times is required");
-    setErrors(errors);
     return Object.keys(errors).length === 0;
   }
 
@@ -70,6 +69,9 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     <FormAdd>
       <FormContent>
         <form onSubmit={handleSubmit}>
+          <LeftContainer>
+            <ButtonAdd onClick={hideAddForm}>X</ButtonAdd>
+          </LeftContainer>
           <InputAdd
             type="text"
             validate
@@ -94,7 +96,9 @@ const AddHabbit = ({ hideAddForm, actions }) => {
             value={habit.times}
             onChange={generateTimesRepeat}
           />
-          <ButtonAdd type="submit">Add</ButtonAdd>
+          <LeftContainer>
+            <ButtonAdd type="submit">Add</ButtonAdd>
+          </LeftContainer>
         </form>
       </FormContent>
     </FormAdd>

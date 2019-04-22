@@ -8,6 +8,7 @@ import InputAdd from "../../layout/habit/InputAdd";
 import FormAdd from "../../layout/habit/FormAdd";
 import FormContent from "../../layout/habit/FormContent";
 import ButtonAdd from "../../layout/habit/ButtonAdd";
+import { toast } from "react-toastify";
 
 const AddHabbit = ({ hideAddForm, actions }) => {
   const today = new Date().toISOString().split("T")[0];
@@ -30,15 +31,16 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     e.preventDefault();
     if (!formIsValid()) return;
     actions.startAddHabit(habit);
+    toast.success("Habit saved.");
     hideAddForm();
   }
 
   function formIsValid() {
     const { name, date, times } = habit;
     const errors = {};
-    if (!name) errors.name = "Name is required";
-    if (!date) errors.date = "Date is required";
-    if (!times) errors.times = "Times is required";
+    if (!name) errors.name = toast.error("Name is required");
+    if (!date) errors.date = toast.error("Date is required");
+    if (!times) errors.times = toast.error("Times is required");
     setErrors(errors);
     return Object.keys(errors).length === 0;
   }
@@ -68,13 +70,9 @@ const AddHabbit = ({ hideAddForm, actions }) => {
     <FormAdd>
       <FormContent>
         <form onSubmit={handleSubmit}>
-          <div>{errors.title}</div>
-          <div>{errors.date}</div>
-          <div>{errors.times}</div>
           <InputAdd
             type="text"
             validate
-            required
             name="name"
             value={habit.name}
             placeholder="Habit name"
@@ -83,15 +81,15 @@ const AddHabbit = ({ hideAddForm, actions }) => {
           <InputAdd
             name="date"
             min={today}
-            required
             type="date"
             value={habit.date}
             onChange={handleChange}
           />
           <InputAdd
             type="number"
-            required
             name="times"
+            min="1"
+            max="100"
             placeholder="TimesRepeat"
             value={habit.times}
             onChange={generateTimesRepeat}

@@ -5,10 +5,12 @@ import { visibleHabits } from "../../reducers/rootReducers";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { ButtonTime, TimeHidden } from "../../layout/habit/ButtonTime";
+import { toast } from "react-toastify";
 
 const ListTimesOfHabit = ({ habitId, times, actions }) => {
   const handleClick = (id, key) => {
     actions.startMakeHabit(id, key);
+    toast.success("Great! You just did your habit");
   };
   const timesList = times.map(time => {
     return (

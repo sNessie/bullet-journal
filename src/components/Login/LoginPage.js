@@ -3,11 +3,15 @@ import { connect } from "react-redux";
 import { startLogin } from "../../reducers/auth.js";
 import PropTypes from "prop-types";
 import LoginWrapper from "../../layout/loginPage/LoginWrapper";
+import ButtonAdd from "../../layout/Button";
+import Layout from "../../layout/Layout";
 
 const LoginPage = ({ startLogin }) => {
   return (
     <LoginWrapper>
-      <button onClick={startLogin}>Login</button>
+      <Layout>
+        <Button onClick={startLogin}>Login</Button>
+      </Layout>
     </LoginWrapper>
   );
 };

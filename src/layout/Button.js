@@ -7,11 +7,14 @@ const Button = styled.button`
   border: none;
   background: none;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.primaryLink};
+  background: ${({ theme }) => theme.colors.primaryLink}
+  color: ${({ theme }) => theme.colors.white};
   border-radius: 5px;
   :hover {
-    color: ${({ theme }) => theme.colors.white};
-    background: ${({ theme }) => theme.colors.primaryLink};
+    color: ${({ theme }) => theme.colors.primaryLink};
+    background: ${({ theme }) => theme.colors.white};
+ 
+    ;
   }
 `;
 

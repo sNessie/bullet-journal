@@ -1,7 +1,8 @@
-import { colors } from "./colors";
+import { colors, rgbaColors } from "./colors";
 
 export const theme = {
   colors,
+  rgbaColors,
   font: {
     thin: 300,
     regular: 400,

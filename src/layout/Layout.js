@@ -5,7 +5,6 @@ import { theme } from "./utils/theme";
 const GlobalStyle = createGlobalStyle`
     html {
         font-size: 62.5%;
-        background: ${({ theme }) => theme.colors.primary};
         color: ${({ theme }) => theme.colors.black};
     }
     body {
@@ -14,6 +13,13 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-size: 1.6rem;
+        background-image: linear-gradient(
+          to right,
+          ${({ theme }) => theme.rgbaColors.greyDark},
+          ${({ theme }) => theme.rgbaColors.greyLight}),
+          url('img/diary.jpg');
+        background-size: cover;
+        background-position: top;
     }
     *, *::before, *::after {
     box-sizing: border-box;

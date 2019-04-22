@@ -15,6 +15,15 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: "file-loader",
+              options: {}
+            }
+          ]
+        },
+        {
           test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: ["babel-loader", "eslint-loader"]

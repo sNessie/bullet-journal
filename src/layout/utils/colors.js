@@ -6,3 +6,8 @@ export const colors = {
   greyDark: "#333",
   greyLight: "#777"
 };
+
+export const rgbaColors = {
+  greyDark: "rgba(51,51,51,.5)",
+  greyLight: "rgba(119,119,119,.5)"
+};

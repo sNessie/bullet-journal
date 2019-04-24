@@ -9,6 +9,8 @@ const AddTodo = () => {
     priority: "low"
   });
 
+  const [category, setCategory] = useState(false);
+
   function handleChange(e) {
     const { name, value } = e.target;
     setTodo(prevTodo => ({
@@ -27,8 +29,13 @@ const AddTodo = () => {
   function handleChangeCategory(e) {
     const { name, value } = e.target;
     if (value === "add") {
-      console.log("add");
+      setTodo(prevTodo => ({
+        ...prevTodo,
+        [name]: ""
+      }));
+      setCategory(true);
     } else {
+      setCategory(false);
       setTodo(prevTodo => ({
         ...prevTodo,
         [name]: value
@@ -56,9 +63,17 @@ const AddTodo = () => {
       <label>
         Category
         <select name="category" onChange={handleChangeCategory}>
-          <option value="add">School</option>
+          <option value="school">School</option>
           <option value="add">Add</option>
         </select>
+        {category ? (
+          <input
+            type="text"
+            name="category"
+            value={todo.category}
+            onChange={handleChange}
+          />
+        ) : null}
       </label>
       <label>
         Pick priority:

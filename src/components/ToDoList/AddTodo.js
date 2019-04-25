@@ -5,8 +5,9 @@ const AddTodo = () => {
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
-    category: "add",
-    priority: "low"
+    category: "",
+    priority: "",
+    ready: false
   });
 
   const [category, setCategory] = useState(false);

@@ -23,7 +23,7 @@ const ListTimesOfHabit = ({ habitId, times, actions }) => {
       </ButtonTime>
     );
   });
-  return <div>{timesList}</div>;
+  return <div>{times.length === 0 ? <p>No habits</p> : timesList}</div>;
 };
 
 ListTimesOfHabit.propTypes = {

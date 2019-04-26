@@ -44,7 +44,11 @@ const ListHabits = ({ habits, dispatch }) => {
       </Card>
     );
   });
-  return <ContainerCard>{habitsList}</ContainerCard>;
+  return (
+    <ContainerCard>
+      {habits.length === 0 ? <p>No habits</p> : habitsList}
+    </ContainerCard>
+  );
 };
 
 ListHabits.propTypes = {

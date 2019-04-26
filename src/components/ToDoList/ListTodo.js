@@ -5,11 +5,14 @@ const ListTodo = () => {
   const todosList = todos.map((todo, i) => {
     return (
       <div key={i}>
-        <h1>{todo.name}</h1>
+        <h1>
+          {todo.name} <button>X</button>
+        </h1>
         <div />
         <div>
           <span>Ready:</span>
           <span>{todo.ready ? "yes" : "no"}</span>
+          <button>make ready</button>
         </div>
         <div>
           <span>Category:</span>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { startAddTodo } from "../../reducers/todosReducers";
+import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 
-const AddTodo = () => {
+const AddTodo = ({ actions }) => {
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
@@ -23,8 +26,8 @@ const AddTodo = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (!formIsValid()) return;
+    actions.startAddTodo(todo);
     toast.success("Todo saved.");
-    console.log(todo);
   }
 
   function handleChangeCategory(e) {
@@ -89,4 +92,14 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: {
+      startAddTodo: bindActionCreators(startAddTodo, dispatch)
+    }
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddTodo);

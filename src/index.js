@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import AppRouter, { history } from "./routers/App";
 import configureStore from "./config/configureStore";
 import { startSetHabits } from "./reducers/habitsReducers";
+import { startSetTodos } from "./reducers/todosReducers";
 import { login, logout } from "./reducers/auth";
 import { firebase } from "./config/fbConfig";
 
@@ -30,7 +31,8 @@ ReactDOM.render(<p>Loading...</p>, document.getElementById("root"));
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
     store.dispatch(login(user.uid));
-    store.dispatch(startSetHabits()).then(() => {
+    store.dispatch(startSetHabits());
+    store.dispatch(startSetTodos()).then(() => {
       renderApp();
       if (history.location.pathname === "/") {
         history.push("/dashboard");

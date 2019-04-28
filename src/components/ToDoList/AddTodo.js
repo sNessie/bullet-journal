@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { startAddTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
 
 const AddTodo = ({ actions }) => {
   const [todo, setTodo] = useState({
@@ -90,6 +91,10 @@ const AddTodo = ({ actions }) => {
       <input type="submit" value="Submit" />
     </form>
   );
+};
+
+AddTodo.propTypes = {
+  actions: PropTypes.object.isRequired
 };
 
 const mapDispatchToProps = dispatch => {

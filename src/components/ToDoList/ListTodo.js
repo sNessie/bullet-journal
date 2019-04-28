@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-const ListTodo = () => {
-  const todos = [];
+const ListTodo = ({ todos }) => {
   const todosList = todos.map((todo, i) => {
     return (
       <div key={i}>
@@ -28,4 +29,14 @@ const ListTodo = () => {
   return <div>{todos.length === 0 ? <p>No todos</p> : todosList}</div>;
 };
 
-export default ListTodo;
+ListTodo.propTypes = {
+  todos: PropTypes.array.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    todos: state.todos
+  };
+};
+
+export default connect(mapStateToProps)(ListTodo);

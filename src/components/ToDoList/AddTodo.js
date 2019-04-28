@@ -10,7 +10,7 @@ const AddTodo = ({ actions }) => {
     name: "",
     date: new Date().toISOString().substring(0, 10),
     category: "",
-    priority: "",
+    priority: "low",
     ready: false
   });
 

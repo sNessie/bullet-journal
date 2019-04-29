@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { startAddTodo } from "../../reducers/todosReducers";
+import { setCategories } from "../../reducers/rootReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
-const AddTodo = ({ actions }) => {
+const AddTodo = ({ categories, actions }) => {
+  console.log(categories);
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
@@ -94,9 +96,15 @@ const AddTodo = ({ actions }) => {
 };
 
 AddTodo.propTypes = {
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired
 };
 
+const mapStateToProps = state => {
+  return {
+    categories: setCategories(state.todos, state.categories)
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
     actions: {
@@ -105,6 +113,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddTodo);

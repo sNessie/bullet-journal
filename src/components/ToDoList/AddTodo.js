@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import PropTypes from "prop-types";
 
 const AddTodo = ({ categories, actions }) => {
-  console.log(categories);
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
@@ -58,6 +57,15 @@ const AddTodo = ({ categories, actions }) => {
     if (!priority) errors.times = toast.error("Priority is required");
     return Object.keys(errors).length === 0;
   }
+
+  const categoriesList = categories.map((cat, i) => {
+    return (
+      <option key={i} value={cat}>
+        {cat}
+      </option>
+    );
+  });
+
   return (
     <form onSubmit={handleSubmit}>
       <label>Name:</label>
@@ -70,8 +78,8 @@ const AddTodo = ({ categories, actions }) => {
       <label>
         Category
         <select name="category" onChange={handleChangeCategory}>
-          <option value="school">School</option>
-          <option value="add">Add</option>
+          {categoriesList}
+          <option value="add">add</option>
         </select>
         {category ? (
           <input

@@ -85,15 +85,17 @@ export const toogleTodo = id => ({
   id
 });
 
-export const startToggleTodo = id => {
+export const startToggleTodo = (id, ready) => {
   return (dispatch, getState) => {
+    let updateData = {};
+    updateData["ready"] = !ready;
     const uid = getState().auth.uid;
     database
       .ref(`users/${uid}/todos/${id}`)
       .orderByChild("ready")
-      .equalTo(false)
+      .equalTo(ready)
       .once("value", function(snapshot) {
-        snapshot.ref.update({ ready: true });
+        snapshot.ref.update(updateData);
       })
       .then(() => {
         dispatch(toogleTodo(id));
@@ -110,7 +112,7 @@ const todosReducers = (state = todosDefaultState, action) => {
     case "TOGGLE_TODO":
       return state.map(todo => {
         if (todo.id === action.id) {
-          todo.ready = true;
+          todo.ready = !todo.ready;
           return {
             ...todo
           };

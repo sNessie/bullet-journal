@@ -17,8 +17,8 @@ const ListTodo = ({ todos, actions }) => {
     toast.info("Todo deleted");
   }
 
-  function toggleTodo(id) {
-    actions.startToggleTodo(id);
+  function toggleTodo(id, ready) {
+    actions.startToggleTodo(id, ready);
     toast.success("Great! You just did your todo");
   }
   const todosList = todos.map((todo, i) => {
@@ -40,7 +40,7 @@ const ListTodo = ({ todos, actions }) => {
           <span>{todo.ready ? "yes" : "no"}</span>
           <button
             onClick={() => {
-              toggleTodo(todo.id);
+              toggleTodo(todo.id, todo.ready);
             }}
           >
             make

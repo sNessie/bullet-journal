@@ -19,6 +19,7 @@ const ListTodo = ({ todos, actions }) => {
 
   function toggleTodo(id) {
     actions.startToggleTodo(id);
+    toast.success("Great! You just did your todo");
   }
   const todosList = todos.map((todo, i) => {
     return (

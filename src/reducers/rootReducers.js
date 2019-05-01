@@ -5,9 +5,9 @@ import todosReducers from "./todosReducers";
 import categoriesReducers from "./categoriesReducers";
 import authReducer from "./auth";
 
-export const visibleHabits = (habits, { text }) => {
-  return habits.filter(habit => {
-    const textMatch = habit.name.toLowerCase().includes(text.toLowerCase());
+export const visibleData = (data, { text }) => {
+  return data.filter(dat => {
+    const textMatch = dat.name.toLowerCase().includes(text.toLowerCase());
     return textMatch;
   });
 };

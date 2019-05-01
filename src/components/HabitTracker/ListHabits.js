@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ListTimesOfHabit from "./ListTimesOfHabit";
 import { connect } from "react-redux";
-import { visibleHabits } from "../../reducers/rootReducers";
+import { visibleData } from "../../reducers/rootReducers";
 import { startRemoveHabits } from "../../reducers/habitsReducers";
 import PropTypes from "prop-types";
 import Card from "../../layout/card/Card";
@@ -9,10 +9,16 @@ import ContainerCard from "../../layout/card/ContainerCard";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
 import { toast } from "react-toastify";
+import { cleanTextFilter } from "../../reducers/filtersReducers";
+import { bindActionCreators } from "redux";
 
-const ListHabits = ({ habits, dispatch }) => {
+const ListHabits = ({ habits, actions }) => {
+  useEffect(() => {
+    actions.cleanTextFilter();
+  }, []);
+
   function deleteHabit(habit) {
-    dispatch(startRemoveHabits({ id: habit.id }));
+    actions.startRemoveHabits({ id: habit.id });
     toast.info("Habit deleted");
   }
   const habitsList = habits.map(habit => {
@@ -53,13 +59,24 @@ const ListHabits = ({ habits, dispatch }) => {
 
 ListHabits.propTypes = {
   habits: PropTypes.array.isRequired,
-  dispatch: PropTypes.func.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    habits: visibleHabits(state.habits, state.filters)
+    habits: visibleData(state.habits, state.filters)
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: {
+      cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch),
+      startRemoveHabits: bindActionCreators(startRemoveHabits, dispatch)
+    }
   };
 };
 
-export default connect(mapStateToProps)(ListHabits);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListHabits);

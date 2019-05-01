@@ -1,25 +1,31 @@
 const filtersDefaultState = {
-    text: ''
+  text: ""
 };
 
-export const setTextFilter = (text='')=> ({
-  type: 'SET_TEXT_FILTER',
+export const cleanTextFilter = (text = "") => ({
+  type: "CLEAN_TEXT_FILTER",
   text
 });
 
+export const setTextFilter = (text = "") => ({
+  type: "SET_TEXT_FILTER",
+  text
+});
 
 const filtersReducers = (state = filtersDefaultState, action) => {
   switch (action.type) {
-    case 'SET_TEXT_FILTER':
+    case "SET_TEXT_FILTER":
       return {
-          ...state,
-          text: action.text
+        ...state,
+        text: action.text
+      };
+    case "CLEAN_TEXT_FILTER":
+      return {
+        ...filtersDefaultState
       };
     default:
       return state;
   }
 };
-
-
 
 export default filtersReducers;

@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { startMakeHabit } from "../../reducers/habitsReducers";
-import { visibleHabits } from "../../reducers/rootReducers";
+import { visibleData } from "../../reducers/rootReducers";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { ButtonTime, TimeHidden } from "../../layout/habit/ButtonTime";
@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-    habits: visibleHabits(state.habits, state.filters)
+    habits: visibleData(state.habits, state.filters)
   };
 };
 

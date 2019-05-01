@@ -1,13 +1,16 @@
 import React from "react";
 import AddTodo from "./AddTodo";
 import ListTodo from "./ListTodo";
+import FiltersForm from "../DashboardPage/FiltersForm";
+import Layout from "../../layout/Layout";
 
 const ToDoList = () => (
-  <div>
+  <Layout>
     ToDoList Page
+    <FiltersForm />
     <AddTodo />
     <ListTodo />
-  </div>
+  </Layout>
 );
 
 export default ToDoList;

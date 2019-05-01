@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { visibleData } from "../../reducers/rootReducers";
+import { cleanTextFilter } from "../../reducers/filtersReducers";
+import { bindActionCreators } from "redux";
 
-const ListTodo = ({ todos }) => {
+const ListTodo = ({ todos, actions }) => {
+  useEffect(() => {
+    actions.cleanTextFilter();
+  }, []);
   const todosList = todos.map((todo, i) => {
     return (
       <div key={i}>
@@ -30,13 +36,26 @@ const ListTodo = ({ todos }) => {
 };
 
 ListTodo.propTypes = {
-  todos: PropTypes.array.isRequired
+  todos: PropTypes.array.isRequired,
+  actions: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    filters: state.filters,
+    todos: visibleData(state.todos, state.filters)
   };
 };
 
-export default connect(mapStateToProps)(ListTodo);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: {
+      cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch)
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ListTodo);

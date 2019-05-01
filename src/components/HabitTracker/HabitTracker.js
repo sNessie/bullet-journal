@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddHabit from "./AddHabit";
 import ListHabits from "./ListHabits";
-import FiltersForm from "./FiltersForm";
+import FiltersForm from "../DashboardPage/FiltersForm";
 import Layout from "../../layout/Layout";
 import Button from "../../layout/Button";
 

@@ -5,6 +5,7 @@ import { visibleData } from "../../reducers/rootReducers";
 import { cleanTextFilter } from "../../reducers/filtersReducers";
 import { startRemoveTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
+import { toast } from "react-toastify";
 
 const ListTodo = ({ todos, actions }) => {
   useEffect(() => {
@@ -13,6 +14,7 @@ const ListTodo = ({ todos, actions }) => {
 
   function deleteTodo(todo) {
     actions.startRemoveTodo({ id: todo.id });
+    toast.info("Todo deleted");
   }
   const todosList = todos.map((todo, i) => {
     return (

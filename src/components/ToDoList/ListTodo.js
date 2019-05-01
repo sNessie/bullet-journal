@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { visibleData } from "../../reducers/rootReducers";
 import { cleanTextFilter } from "../../reducers/filtersReducers";
-import { startRemoveTodo } from "../../reducers/todosReducers";
+import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 
@@ -15,6 +15,10 @@ const ListTodo = ({ todos, actions }) => {
   function deleteTodo(todo) {
     actions.startRemoveTodo({ id: todo.id });
     toast.info("Todo deleted");
+  }
+
+  function toggleTodo(id) {
+    actions.startToggleTodo(id);
   }
   const todosList = todos.map((todo, i) => {
     return (
@@ -33,7 +37,13 @@ const ListTodo = ({ todos, actions }) => {
         <div>
           <span>Ready:</span>
           <span>{todo.ready ? "yes" : "no"}</span>
-          <button>make ready</button>
+          <button
+            onClick={() => {
+              toggleTodo(todo.id);
+            }}
+          >
+            make
+          </button>
         </div>
         <div>
           <span>Category:</span>
@@ -65,7 +75,8 @@ const mapDispatchToProps = dispatch => {
   return {
     actions: {
       cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch),
-      startRemoveTodo: bindActionCreators(startRemoveTodo, dispatch)
+      startRemoveTodo: bindActionCreators(startRemoveTodo, dispatch),
+      startToggleTodo: bindActionCreators(startToggleTodo, dispatch)
     }
   };
 };

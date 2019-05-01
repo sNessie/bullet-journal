@@ -80,21 +80,44 @@ export const startSetTodos = () => {
   };
 };
 
+export const toogleTodo = id => ({
+  type: "TOGGLE_TODO",
+  id
+});
+
+export const startToggleTodo = id => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    database
+      .ref(`users/${uid}/todos/${id}`)
+      .orderByChild("ready")
+      .equalTo(false)
+      .once("value", function(snapshot) {
+        snapshot.ref.update({ ready: true });
+      })
+      .then(() => {
+        dispatch(toogleTodo(id));
+      });
+  };
+};
+
 const todosReducers = (state = todosDefaultState, action) => {
   switch (action.type) {
     case "ADD_TODO":
       return [...state, action.todo];
     case "REMOVE_TODO":
       return state.filter(({ id }) => id !== action.id);
-    case "EDIT_TODO":
+    case "TOGGLE_TODO":
       return state.map(todo => {
         if (todo.id === action.id) {
+          todo.ready = true;
           return {
-            ...todo,
-            ...action.updates
+            ...todo
           };
         } else {
-          return todo;
+          return {
+            ...todo
+          };
         }
       });
     case "SET_TODO":

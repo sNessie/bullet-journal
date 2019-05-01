@@ -3,17 +3,29 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { visibleData } from "../../reducers/rootReducers";
 import { cleanTextFilter } from "../../reducers/filtersReducers";
+import { startRemoveTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 
 const ListTodo = ({ todos, actions }) => {
   useEffect(() => {
     actions.cleanTextFilter();
   }, []);
+
+  function deleteTodo(todo) {
+    actions.startRemoveTodo({ id: todo.id });
+  }
   const todosList = todos.map((todo, i) => {
     return (
       <div key={i}>
         <h1>
-          {todo.name} <button>X</button>
+          {todo.name}{" "}
+          <button
+            onClick={() => {
+              deleteTodo(todo);
+            }}
+          >
+            X
+          </button>
         </h1>
         <div />
         <div>
@@ -50,7 +62,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     actions: {
-      cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch)
+      cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch),
+      startRemoveTodo: bindActionCreators(startRemoveTodo, dispatch)
     }
   };
 };

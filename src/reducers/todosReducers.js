@@ -37,6 +37,18 @@ export const removeTodo = ({ id } = {}) => ({
   id
 });
 
+export const startRemoveTodo = ({ id } = {}) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    database
+      .ref(`users/${uid}/todos/${id}`)
+      .remove()
+      .then(() => {
+        dispatch(removeTodo({ id }));
+      });
+  };
+};
+
 export const editTodo = (id, updates) => ({
   type: "EDIT_TODO",
   id,

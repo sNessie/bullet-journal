@@ -2,13 +2,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+import Layout from "../layout/Layout";
 
 const PublicRoute = ({ isAuthentticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     component={props =>
       !isAuthentticated ? (
-        <Component {...props} />
+        <Layout>
+          <Component {...props} />
+        </Layout>
       ) : (
         <Redirect to="/dashboard" />
       )

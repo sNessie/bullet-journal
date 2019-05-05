@@ -15,16 +15,21 @@ const GlobalStyle = createGlobalStyle`
     }
     html {
         font-size: 62.5%;
-        color: ${({ theme }) => theme.colors.black};
-        background-color: ${theme.colors.greyLight};
-        @import url('https://fonts.googleapis.com/css?family=Montserrat');
-        font-family: 'Montserrat', sans-serif;
+        
+        
+    }
+    body {
+      font-size: 1.6rem;
+      background-color: ${theme.colors.greyLight};
+      @import url('https://fonts.googleapis.com/css?family=Montserrat');
+      font-family: 'Montserrat', sans-serif;
+      color: ${({ theme }) => theme.colors.black};
     }
 `;
 
 const StyledWrapper = styled.div`
   max-width: 120rem;
-  margin: 5rem auto;
+  margin: 3rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

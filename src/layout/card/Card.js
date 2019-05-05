@@ -3,7 +3,6 @@ import { theme } from "../utils/theme";
 
 const Card = styled.article`
   width: 25%;
-  margin-right: 3rem;
   margin-bottom: 5rem;
   border-radius: 1.6rem;
   padding: 2rem;

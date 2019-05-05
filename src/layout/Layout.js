@@ -16,12 +16,9 @@ const GlobalStyle = createGlobalStyle`
     html {
         font-size: 62.5%;
         color: ${({ theme }) => theme.colors.black};
-    }
-    body {
+        background-color: ${theme.colors.greyLight};
         @import url('https://fonts.googleapis.com/css?family=Montserrat');
         font-family: 'Montserrat', sans-serif;
-        font-size: 1.6rem;
-        background-color: ${theme.colors.greyLight};
     }
 `;
 
@@ -31,6 +28,7 @@ const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 1.6rem;
 `;
 
 const Layout = ({ children }) => (

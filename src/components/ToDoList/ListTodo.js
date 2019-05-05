@@ -30,7 +30,7 @@ const ListTodo = ({ todos, actions }) => {
   }
   const todosList = todos.map((todo, i) => {
     return (
-      <Card data="low" key={i}>
+      <Card data={todo.priority} key={i}>
         <H1>
           {todo.name}{" "}
           <Button

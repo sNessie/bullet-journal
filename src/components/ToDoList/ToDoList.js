@@ -6,7 +6,6 @@ import Layout from "../../layout/Layout";
 
 const ToDoList = () => (
   <Layout>
-    ToDoList Page
     <FiltersForm />
     <AddTodo />
     <ListTodo />

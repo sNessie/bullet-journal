@@ -4,6 +4,15 @@ import { theme } from "./utils/theme";
 import PropTypes from "prop-types";
 
 const GlobalStyle = createGlobalStyle`
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    *,
+    ::after,
+    ::before {
+      box-sizing: inherit;
+    }
     html {
         font-size: 62.5%;
         color: ${({ theme }) => theme.colors.black};
@@ -14,22 +23,13 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         margin: 0;
         font-size: 1.6rem;
-        background-image: linear-gradient(
-          to right,
-          ${({ theme }) => theme.rgbaColors.greyDark},
-          ${({ theme }) => theme.rgbaColors.greyLight}),
-          url('img/diary.jpg');
-        background-size: cover;
-        background-position: top;
+        background-color: ${theme.colors.greyLight};
     }
-    *, *::before, *::after {
-    box-sizing: border-box;
-  }
 `;
 
 const StyledWrapper = styled.div`
   max-width: 120rem;
-  margin: 0 auto;
+  margin: 5rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

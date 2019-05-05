@@ -6,6 +6,11 @@ import { cleanTextFilter } from "../../reducers/filtersReducers";
 import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
+import Card from "../../layout/card/Card";
+import H1 from "../../layout/card/H1";
+import Button from "../../layout/Button";
+import ContainerCard from "../../layout/card/ContainerCard";
+import ReactSVG from "react-svg";
 
 const ListTodo = ({ todos, actions }) => {
   useEffect(() => {
@@ -19,45 +24,48 @@ const ListTodo = ({ todos, actions }) => {
 
   function toggleTodo(id, ready) {
     actions.startToggleTodo(id, ready);
-    toast.success("Great! You just did your todo");
+    ready
+      ? toast.info("Still not ready?")
+      : toast.success("Great! You just did your todo");
   }
   const todosList = todos.map((todo, i) => {
     return (
-      <div key={i}>
-        <h1>
+      <Card data="low" key={i}>
+        <H1>
           {todo.name}{" "}
-          <button
+          <Button
             onClick={() => {
               deleteTodo(todo);
             }}
           >
             X
-          </button>
-        </h1>
-        <div />
+          </Button>
+        </H1>
         <div>
           <span>Ready:</span>
-          <span>{todo.ready ? "yes" : "no"}</span>
-          <button
+          <ReactSVG
+            src={
+              todo.ready ? "img/svg/checkmark.svg" : "img/svg/checkmark2.svg"
+            }
+            wrapper="span"
+            svgStyle={{ width: 20, height: 20 }}
             onClick={() => {
               toggleTodo(todo.id, todo.ready);
             }}
-          >
-            make
-          </button>
+          />
         </div>
         <div>
           <span>Category:</span>
           <span>{todo.category}</span>
         </div>
-        <div>
-          <span>Priority:</span>
-          <span>{todo.priority}</span>
-        </div>
-      </div>
+      </Card>
     );
   });
-  return <div>{todos.length === 0 ? <p>No todos</p> : todosList}</div>;
+  return (
+    <ContainerCard>
+      {todos.length === 0 ? <p>No todos</p> : todosList}
+    </ContainerCard>
+  );
 };
 
 ListTodo.propTypes = {

@@ -1,4 +1,4 @@
-import { colors, rgbaColors } from "./colors";
+import { colors, rgbaColors, boxShadow } from "./colors";
 
 export const theme = {
   colors,
@@ -8,6 +8,7 @@ export const theme = {
     regular: 400,
     bold: 800
   },
+  boxShadow,
   media: {
     tablet: "@media (min-width: 728px)",
     desktop: "@media (min-width: 1024px)"

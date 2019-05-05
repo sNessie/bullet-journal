@@ -15,6 +15,10 @@ module.exports = env => {
     module: {
       rules: [
         {
+          test: /\.svg$/,
+          loader: "svg-inline-loader"
+        },
+        {
           test: /\.(png|jpg|gif)$/,
           use: [
             {

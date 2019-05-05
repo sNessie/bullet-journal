@@ -1,9 +1,10 @@
 import database from "../config/fbConfig";
+import * as types from "./actionType";
 
 const todosDefaultState = [];
 
 export const addTodo = todo => ({
-  type: "ADD_TODO",
+  type: types.ADD_TODO,
   todo
 });
 
@@ -33,7 +34,7 @@ export const startAddTodo = (todoData = {}) => {
 };
 
 export const removeTodo = ({ id } = {}) => ({
-  type: "REMOVE_TODO",
+  type: types.REMOVE_TODO,
   id
 });
 
@@ -50,13 +51,13 @@ export const startRemoveTodo = ({ id } = {}) => {
 };
 
 export const editTodo = (id, updates) => ({
-  type: "EDIT_TODO",
+  type: types.EDIT_TODO,
   id,
   updates
 });
 
 export const setTodos = todos => ({
-  type: "SET_TODO",
+  type: types.SET_TODO,
   todos
 });
 
@@ -81,7 +82,7 @@ export const startSetTodos = () => {
 };
 
 export const toogleTodo = id => ({
-  type: "TOGGLE_TODO",
+  type: types.TOGGLE_TODO,
   id
 });
 
@@ -105,11 +106,11 @@ export const startToggleTodo = (id, ready) => {
 
 const todosReducers = (state = todosDefaultState, action) => {
   switch (action.type) {
-    case "ADD_TODO":
+    case types.ADD_TODO:
       return [...state, action.todo];
-    case "REMOVE_TODO":
+    case types.REMOVE_TODO:
       return state.filter(({ id }) => id !== action.id);
-    case "TOGGLE_TODO":
+    case types.TOGGLE_TODO:
       return state.map(todo => {
         if (todo.id === action.id) {
           todo.ready = !todo.ready;
@@ -122,7 +123,7 @@ const todosReducers = (state = todosDefaultState, action) => {
           };
         }
       });
-    case "SET_TODO":
+    case types.SET_TODO:
       return action.todos;
     default:
       return state;

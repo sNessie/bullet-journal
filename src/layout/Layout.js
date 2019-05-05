@@ -20,8 +20,6 @@ const GlobalStyle = createGlobalStyle`
     body {
         @import url('https://fonts.googleapis.com/css?family=Montserrat');
         font-family: 'Montserrat', sans-serif;
-        padding: 0;
-        margin: 0;
         font-size: 1.6rem;
         background-color: ${theme.colors.greyLight};
     }

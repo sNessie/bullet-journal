@@ -4,7 +4,7 @@ import { startMakeHabit } from "../../reducers/habitsReducers";
 import { visibleData } from "../../reducers/rootReducers";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
-import { ButtonTime, TimeHidden } from "../../layout/habit/ButtonTime";
+import { ButtonTime, TimeHidden } from "../../layout/addForm/ButtonTime";
 import { toast } from "react-toastify";
 import ReactSVG from "react-svg";
 

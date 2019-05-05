@@ -1,9 +1,10 @@
 import database from "../config/fbConfig";
+import * as types from "./actionType";
 
 const habitsDefaultState = [];
 
 export const addHabit = habit => ({
-  type: "ADD_HABIT",
+  type: types.ADD_HABIT,
   habit
 });
 
@@ -27,7 +28,7 @@ export const startAddHabit = (habitData = {}) => {
 };
 
 export const removeHabit = ({ id } = {}) => ({
-  type: "REMOVE_HABIT",
+  type: types.REMOVE_HABIT,
   id
 });
 
@@ -44,12 +45,12 @@ export const startRemoveHabits = ({ id } = {}) => {
 };
 
 export const editHabit = (id, updates) => ({
-  type: "EDIT_HABIT",
+  type: types.EDIT_HABIT,
   id,
   updates
 });
 export const makeHabit = id => ({
-  type: "MAKE_HABIT",
+  type: types.MAKE_HABIT,
   id
 });
 
@@ -71,7 +72,7 @@ export const startMakeHabit = (id, habitId = {}) => {
 };
 
 export const setHabits = habits => ({
-  type: "SET_HABITS",
+  type: types.SET_HABITS,
   habits
 });
 
@@ -97,11 +98,11 @@ export const startSetHabits = () => {
 
 const habitsReducers = (state = habitsDefaultState, action) => {
   switch (action.type) {
-    case "ADD_HABIT":
+    case types.ADD_HABIT:
       return [...state, action.habit];
-    case "REMOVE_HABIT":
+    case types.REMOVE_HABIT:
       return state.filter(({ id }) => id !== action.id);
-    case "EDIT_HABIT":
+    case types.EDIT_HABIT:
       return state.map(habit => {
         if (habit.id === action.id) {
           return {
@@ -112,7 +113,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
           return habit;
         }
       });
-    case "MAKE_HABIT":
+    case types.MAKE_HABIT:
       return state.map(habit => {
         habit.timesRepeat.map(t => {
           if (t.id === action.id) {
@@ -130,7 +131,7 @@ const habitsReducers = (state = habitsDefaultState, action) => {
           ...habit
         };
       });
-    case "SET_HABITS":
+    case types.SET_HABITS:
       return action.habits;
     default:
       return state;

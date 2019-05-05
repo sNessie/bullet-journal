@@ -4,11 +4,11 @@ import { startAddTodo } from "../../reducers/todosReducers";
 import { setCategories } from "../../reducers/rootReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
-import InputAdd from "../../layout/habit/InputAdd";
-import { SelectAdd, SelectDiv } from "../../layout/habit/SelectAdd";
-import FormAdd from "../../layout/habit/FormAdd";
-import FormContent from "../../layout/habit/FormContent";
-import ButtonAdd from "../../layout/habit/ButtonAdd";
+import InputAdd from "../../layout/addForm/InputAdd";
+import { SelectAdd, SelectDiv } from "../../layout/addForm/SelectAdd";
+import FormAdd from "../../layout/addForm/FormAdd";
+import FormContent from "../../layout/addForm/FormContent";
+import ButtonAdd from "../../layout/addForm/ButtonAdd";
 import { LeftContainer } from "../../layout/Container";
 import PropTypes from "prop-types";
 

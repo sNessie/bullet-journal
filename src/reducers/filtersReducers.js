@@ -1,25 +1,27 @@
+import * as types from "./actionType";
+
 const filtersDefaultState = {
   text: ""
 };
 
 export const cleanTextFilter = (text = "") => ({
-  type: "CLEAN_TEXT_FILTER",
+  type: types.CLEAN_TEXT_FILTER,
   text
 });
 
 export const setTextFilter = (text = "") => ({
-  type: "SET_TEXT_FILTER",
+  type: types.SET_TEXT_FILTER,
   text
 });
 
 const filtersReducers = (state = filtersDefaultState, action) => {
   switch (action.type) {
-    case "SET_TEXT_FILTER":
+    case types.SET_TEXT_FILTER:
       return {
         ...state,
         text: action.text
       };
-    case "CLEAN_TEXT_FILTER":
+    case types.CLEAN_TEXT_FILTER:
       return {
         ...filtersDefaultState
       };

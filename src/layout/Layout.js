@@ -14,16 +14,13 @@ const GlobalStyle = createGlobalStyle`
       box-sizing: inherit;
     }
     html {
-        font-size: 62.5%;
-        
-        
+      font-size: 62.5%;
+      background-color: ${theme.colors.greyLight};
+      font-family: 'Montserrat', sans-serif;
+      color: ${({ theme }) => theme.colors.black};
     }
     body {
       font-size: 1.6rem;
-      background-color: ${theme.colors.greyLight};
-      @import url('https://fonts.googleapis.com/css?family=Montserrat');
-      font-family: 'Montserrat', sans-serif;
-      color: ${({ theme }) => theme.colors.black};
     }
 `;
 

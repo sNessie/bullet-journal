@@ -11,7 +11,6 @@ const HeaderNav = styled.nav`
   padding: 2rem;
   border-bottom: 1px solid ${theme.colors.borderBottom};
   z-index: 100;
-  font-size: 1.6rem;
 `;
 
 export default HeaderNav;

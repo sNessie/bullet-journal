@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { ButtonTime, TimeHidden } from "../../layout/habit/ButtonTime";
 import { toast } from "react-toastify";
+import ReactSVG from "react-svg";
 
 const ListTimesOfHabit = ({ habitId, times, actions }) => {
   const handleClick = (id, key) => {
@@ -20,6 +21,11 @@ const ListTimesOfHabit = ({ habitId, times, actions }) => {
         onClick={() => handleClick(time.id, habitId)}
       >
         <TimeHidden className="hidden">{time.date}</TimeHidden>
+        <ReactSVG
+          src={time.ready ? "img/svg/checkmark.svg" : "img/svg/checkmark2.svg"}
+          wrapper="span"
+          svgStyle={{ width: 20, height: 20 }}
+        />
       </ButtonTime>
     );
   });

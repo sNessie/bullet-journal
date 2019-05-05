@@ -6,13 +6,9 @@ export const ButtonTime = styled.button`
   margin: 2rem 1rem 0;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
   border: none;
   transition: all 0.3s;
-  background: ${props =>
-    props.disabled
-      ? props.theme.colors.greyLight
-      : props.theme.colors.greyDark};
+  background: none;
 `;
 
 export const TimeHidden = styled.span`

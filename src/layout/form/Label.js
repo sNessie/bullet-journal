@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Label = styled.label`
   position: absolute;
-  left: 2rem;
+  left: 3rem;
   ${props =>
     props.hasFocus
       ? "top:-1rem; z-index:100; font-size:1.2rem"

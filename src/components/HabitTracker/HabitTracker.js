@@ -4,6 +4,7 @@ import ListHabits from "./ListHabits";
 import FiltersForm from "../DashboardPage/FiltersForm";
 import Layout from "../../layout/Layout";
 import Button from "../../layout/Button";
+import { CenterContainer } from "../../layout/Container";
 
 const HabitTracker = () => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -17,12 +18,10 @@ const HabitTracker = () => {
   return (
     <Layout>
       <FiltersForm />
-      {showAddForm ? (
-        <Button onClick={hideAddForm}>Hide add form</Button>
-      ) : (
+      <CenterContainer>
         <Button onClick={addFormShow}>Show add form</Button>
-      )}
-      {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
+        {showAddForm ? <AddHabit hideAddForm={hideAddForm} /> : null}
+      </CenterContainer>
       <ListHabits />
     </Layout>
   );

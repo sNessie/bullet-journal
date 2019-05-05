@@ -4,9 +4,15 @@ import { startAddTodo } from "../../reducers/todosReducers";
 import { setCategories } from "../../reducers/rootReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
+import InputAdd from "../../layout/habit/InputAdd";
+import { SelectAdd, SelectDiv } from "../../layout/habit/SelectAdd";
+import FormAdd from "../../layout/habit/FormAdd";
+import FormContent from "../../layout/habit/FormContent";
+import ButtonAdd from "../../layout/habit/ButtonAdd";
+import { LeftContainer } from "../../layout/Container";
 import PropTypes from "prop-types";
 
-const AddTodo = ({ categories, actions }) => {
+const AddTodo = ({ hideAddForm, categories, actions }) => {
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
@@ -30,6 +36,7 @@ const AddTodo = ({ categories, actions }) => {
     if (!formIsValid()) return;
     actions.startAddTodo(todo);
     toast.success("Todo saved.");
+    hideAddForm();
   }
 
   function handleChangeCategory(e) {
@@ -67,43 +74,55 @@ const AddTodo = ({ categories, actions }) => {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Name:</label>
-      <input
-        type="text"
-        name="name"
-        value={todo.name}
-        onChange={handleChange}
-      />
-      <label>
-        Category
-        <select name="category" onChange={handleChangeCategory}>
-          {categoriesList}
-          <option value="add">add</option>
-        </select>
-        {category ? (
-          <input
+    <FormAdd>
+      <FormContent>
+        <form onSubmit={handleSubmit}>
+          <LeftContainer>
+            <ButtonAdd onClick={hideAddForm}>X</ButtonAdd>
+          </LeftContainer>
+          <InputAdd
             type="text"
-            name="category"
-            value={todo.category}
+            name="name"
+            value={todo.name}
             onChange={handleChange}
+            placeholder="Name"
           />
-        ) : null}
-      </label>
-      <label>
-        Pick priority:
-        <select name="priority" onChange={handleChange}>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+          <SelectDiv>
+            <SelectAdd name="category" onChange={handleChangeCategory}>
+              <option disabled selected>
+                Select your category
+              </option>
+              {categoriesList}
+              <option value="add">add</option>
+            </SelectAdd>
+          </SelectDiv>
+          {category ? (
+            <InputAdd
+              type="text"
+              name="category"
+              value={todo.category}
+              onChange={handleChange}
+            />
+          ) : null}
+          <SelectDiv>
+            <SelectAdd name="priority" onChange={handleChange}>
+              <option disabled selected>
+                Select your priority
+              </option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </SelectAdd>
+          </SelectDiv>
+          <ButtonAdd type="submit">Add</ButtonAdd>
+        </form>
+      </FormContent>
+    </FormAdd>
   );
 };
 
 AddTodo.propTypes = {
+  hideAddForm: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired
 };

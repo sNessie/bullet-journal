@@ -28,15 +28,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const StyledWrapper = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Montserrat");
   max-width: 120rem;
   margin: 5rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.6rem;
-  background-color: ${theme.colors.greyLight};
 `;
 
 const Layout = ({ children }) => (

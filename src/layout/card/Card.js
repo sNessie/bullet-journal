@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { theme } from "../utils/theme";
 
 const Card = styled.article`
-  width: 25%;
+  width: 100%;
   margin-bottom: 5rem;
-  border-radius: 1.6rem;
+  border-radius: 1.4rem;
   padding: 2rem;
-  box-shadow: ${theme.boxShadow.boxShadowCard};
+  box-shadow: ${({ theme }) => theme.boxShadow.boxShadowCard};
   background: ${props => {
     switch (props.data) {
       case "low":
@@ -20,8 +20,14 @@ const Card = styled.article`
     }
   }};
   transition: box-shadow 0.25s ease;
+  ${({ theme }) => theme.media.tablet} {
+    width: 45%;
+  }
+  ${({ theme }) => theme.media.desktop} {
+    width: 30%;
+  }
   :hover {
-    box-shadow: ${theme.boxShadow.boxShadowCardHover};
+    box-shadow: ${({ theme }) => theme.boxShadow.boxShadowCardHover};
   }
 `;
 

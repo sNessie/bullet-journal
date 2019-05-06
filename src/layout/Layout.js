@@ -7,15 +7,11 @@ const GlobalStyle = createGlobalStyle`
     * {
       margin: 0;
       padding: 0;
-    }
-    *,
-    ::after,
-    ::before {
-      box-sizing: inherit;
+      box-sizing: border-box;
     }
     html {
       font-size: 62.5%;
-      background-color: ${theme.colors.greyLight};
+      background-color: ${({ theme }) => theme.colors.greyLight};
       font-family: 'Montserrat', sans-serif;
       color: ${({ theme }) => theme.colors.black};
     }
@@ -26,11 +22,14 @@ const GlobalStyle = createGlobalStyle`
 
 const StyledWrapper = styled.div`
   max-width: 120rem;
-  margin: 3rem auto;
+  margin: 1rem auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: 1.6rem;
+  ${({ theme }) => theme.media.tablet} {
+    margin: 3rem auto;
+  }
 `;
 
 const Layout = ({ children }) => (

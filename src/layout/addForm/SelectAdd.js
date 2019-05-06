@@ -11,6 +11,6 @@ export const SelectAdd = styled.select`
   background: transparent;
   border: none;
   height: 29px;
-  width: 102%;
+  width: 105%;
   padding: 5px 10px;
 `;

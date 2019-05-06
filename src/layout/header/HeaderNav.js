@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "../utils/theme";
 
 const HeaderNav = styled.nav`
   width: 100vw;
@@ -7,10 +6,13 @@ const HeaderNav = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: ${theme.colors.white};
+  text-align: right;
   padding: 2rem;
-  border-bottom: 1px solid ${theme.colors.borderBottom};
   z-index: 100;
+  ${({ theme }) => theme.media.tablet} {
+    background-color: ${({ theme }) => theme.colors.white};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.borderBottom};
+  }
 `;
 
 export default HeaderNav;

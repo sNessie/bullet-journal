@@ -8,7 +8,6 @@ const FormAdd = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 9999;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
 `;
 

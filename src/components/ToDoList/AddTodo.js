@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { startAddTodo } from "../../reducers/todosReducers";
-import { setCategories } from "../../reducers/rootReducers";
+import { setCategories, visibleData } from "../../reducers/rootReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import InputAdd from "../../layout/addForm/InputAdd";
@@ -12,12 +12,12 @@ import ButtonAdd from "../../layout/addForm/ButtonAdd";
 import { LeftContainer } from "../../layout/Container";
 import PropTypes from "prop-types";
 
-const AddTodo = ({ hideAddForm, categories, actions }) => {
+const AddTodo = ({ hideAddForm, categories, todos, actions }) => {
   const [todo, setTodo] = useState({
     name: "",
     date: new Date().toISOString().substring(0, 10),
     category: "",
-    priority: "low",
+    priority: "",
     ready: false
   });
 
@@ -34,7 +34,16 @@ const AddTodo = ({ hideAddForm, categories, actions }) => {
   function handleSubmit(e) {
     e.preventDefault();
     if (!formIsValid()) return;
-    actions.startAddTodo(todo);
+    let findTodo = todos.find(t => t.id === todo.date);
+    if (typeof findTodo === "undefined") {
+      findTodo = {
+        id: todo.date,
+        todo: [{ ...todo }]
+      };
+    } else {
+      findTodo.todo.push(todo);
+    }
+    actions.startAddTodo(findTodo);
     toast.success("Todo saved.");
     hideAddForm();
   }
@@ -60,7 +69,7 @@ const AddTodo = ({ hideAddForm, categories, actions }) => {
     const { name, category, priority } = todo;
     const errors = {};
     if (!name) errors.name = toast.error("Name is required");
-    if (!category) errors.date = toast.error("Category is required");
+    if (!category) errors.category = toast.error("Category is required");
     if (!priority) errors.times = toast.error("Priority is required");
     return Object.keys(errors).length === 0;
   }
@@ -87,11 +96,17 @@ const AddTodo = ({ hideAddForm, categories, actions }) => {
             onChange={handleChange}
             placeholder="Name"
           />
+          <InputAdd
+            type="date"
+            name="date"
+            min={todo.date}
+            value={todo.date}
+            onChange={handleChange}
+            placeholder="Date"
+          />
           <SelectDiv>
             <SelectAdd name="category" onChange={handleChangeCategory}>
-              <option disabled selected>
-                Select your category
-              </option>
+              <option defaultValue>Select your category</option>
               {categoriesList}
               <option value="add">add</option>
             </SelectAdd>
@@ -106,9 +121,7 @@ const AddTodo = ({ hideAddForm, categories, actions }) => {
           ) : null}
           <SelectDiv>
             <SelectAdd name="priority" onChange={handleChange}>
-              <option disabled selected>
-                Select your priority
-              </option>
+              <option defaultValue>Select your priority</option>
               <option value="low">Low</option>
               <option value="medium">Medium</option>
               <option value="high">High</option>
@@ -129,7 +142,8 @@ AddTodo.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    categories: setCategories(state.todos, state.categories)
+    categories: setCategories(state.todos, state.categories),
+    todos: state.todos
   };
 };
 const mapDispatchToProps = dispatch => {

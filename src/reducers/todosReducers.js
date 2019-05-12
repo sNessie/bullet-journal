@@ -11,22 +11,19 @@ export const addTodo = todo => ({
 export const startAddTodo = (todoData = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const {
-      name = "",
-      date = "",
-      category = "",
-      priority = "",
-      ready = ""
-    } = todoData;
-    const todo = { name, date, category, priority, ready };
+    // const {
+    //   id = "",
+    //   todo: [{ name = "", date = "", category = "", priority = "", ready = "" }]
+    // } = todoData;
+    // const todo = { name, date, category, priority, ready };
     database
-      .ref(`users/${uid}/todos`)
-      .push(todo)
+      .ref(`users/${uid}/todos/${todoData.id}`)
+      .update(todoData)
       .then(ref => {
         dispatch(
           addTodo({
-            id: ref.key,
-            ...todo
+            id: todoData.date,
+            ...todoData
           })
         );
       });

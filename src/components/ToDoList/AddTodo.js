@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import uuid from "uuid";
 import { startAddTodo } from "../../reducers/todosReducers";
-import { setCategories, visibleData } from "../../reducers/rootReducers";
+import { setCategories } from "../../reducers/rootReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import InputAdd from "../../layout/addForm/InputAdd";
@@ -14,6 +15,7 @@ import PropTypes from "prop-types";
 
 const AddTodo = ({ hideAddForm, categories, todos, actions }) => {
   const [todo, setTodo] = useState({
+    id: uuid(),
     name: "",
     date: new Date().toISOString().substring(0, 10),
     category: "",
@@ -40,10 +42,11 @@ const AddTodo = ({ hideAddForm, categories, todos, actions }) => {
         id: todo.date,
         todo: [{ ...todo }]
       };
+      actions.startAddTodo(findTodo, true);
     } else {
       findTodo.todo.push(todo);
+      actions.startAddTodo(findTodo, false);
     }
-    actions.startAddTodo(findTodo);
     toast.success("Todo saved.");
     hideAddForm();
   }
@@ -137,6 +140,7 @@ const AddTodo = ({ hideAddForm, categories, todos, actions }) => {
 AddTodo.propTypes = {
   hideAddForm: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
+  todos: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired
 };
 

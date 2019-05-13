@@ -6,6 +6,7 @@ export const EDIT_HABIT = "EDIT_HABIT";
 export const MAKE_HABIT = "MAKE_HABIT";
 export const SET_HABITS = "SET_HABITS";
 export const ADD_TODO = "ADD_TODO";
+export const ADD_NEW_TODO = "ADD_NEW_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const SET_TODO = "SET_TODO";

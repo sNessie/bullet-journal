@@ -8,24 +8,19 @@ export const addTodo = todo => ({
   todo
 });
 
-export const startAddTodo = (todoData = {}) => {
+export const addNewTodo = todo => ({
+  type: types.ADD_NEW_TODO,
+  todo
+});
+
+export const startAddTodo = (todoData = {}, todoNew) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    // const {
-    //   id = "",
-    //   todo: [{ name = "", date = "", category = "", priority = "", ready = "" }]
-    // } = todoData;
-    // const todo = { name, date, category, priority, ready };
     database
       .ref(`users/${uid}/todos/${todoData.id}`)
       .update(todoData)
-      .then(ref => {
-        dispatch(
-          addTodo({
-            id: todoData.date,
-            ...todoData
-          })
-        );
+      .then(() => {
+        todoNew ? dispatch(addNewTodo(todoData)) : dispatch(addTodo(todoData));
       });
   };
 };
@@ -103,10 +98,14 @@ export const startToggleTodo = (id, ready) => {
 
 const todosReducers = (state = todosDefaultState, action) => {
   switch (action.type) {
-    case types.ADD_TODO:
+    case types.ADD_NEW_TODO:
       return [...state, action.todo];
+    case types.ADD_TODO:
+      return state.map(todo =>
+        todo.id === action.todo.id ? action.todo : todo
+      );
     case types.REMOVE_TODO:
-      return state.filter(({ id }) => id !== action.id);
+      return state.filter(todo => todo.id !== action.id);
     case types.TOGGLE_TODO:
       return state.map(todo => {
         if (todo.id === action.id) {

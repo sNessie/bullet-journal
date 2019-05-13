@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { visibleData } from "../../reducers/rootReducers";
+// import { visibleData } from "../../reducers/rootReducers";
 import { cleanTextFilter } from "../../reducers/filtersReducers";
 import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Card from "../../layout/card/Card";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
@@ -17,12 +17,47 @@ const ListTodo = ({ todos, actions }) => {
     actions.cleanTextFilter();
   }, []);
 
-  const todo = [];
-  console.log(todos);
-  const todosList = todos.map(todo => todo);
+  // function toggleTodo(id, ready) {
+  //   // console.log(id, ready);
+  //   actions.startToggleTodo(id, ready);
+  //   ready
+  //     ? toast.info("Still not ready?")
+  //     : toast.success("Great! You just did your todo");
+  // }
+
+  const todosList = todos.map(t => {
+    return (
+      <Card key={t.id}>
+        <H1>
+          {t.id} <Button>X</Button>
+        </H1>
+        <ul>
+          {t.todo.map((todo, i) => {
+            return (
+              <li key={i}>
+                {todo.name}
+                <ReactSVG
+                  src={
+                    todo.ready
+                      ? "img/svg/checkmark.svg"
+                      : "img/svg/checkmark2.svg"
+                  }
+                  wrapper="span"
+                  svgStyle={{ width: 20, height: 20 }}
+                  // onClick={() => {
+                  //   toggleTodo(t.id, todo.ready);
+                  // }}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </Card>
+    );
+  });
   return (
     <ContainerCard>
-      {todo.length === 0 ? <p>No todos</p> : todosList}
+      {todosList.length === 0 ? <p>No todos</p> : todosList}
     </ContainerCard>
   );
 };

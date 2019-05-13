@@ -14,10 +14,12 @@ export const visibleData = (data, { text }) => {
 
 export const setCategories = (todos, category) => {
   todos.map(todo => {
-    let index = category.findIndex(x => x == todo.category);
-    if (index === -1) {
-      category.push(todo.category);
-    }
+    todo.todo.map(t => {
+      let index = category.findIndex(x => x == t.category);
+      if (index === -1) {
+        category.push(t.category);
+      }
+    });
   });
   return category;
 };

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { cleanTextFilter } from "../../reducers/filtersReducers";
 import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
-// import { toast } from "react-toastify";
+import { toast } from "react-toastify";
 import Card from "../../layout/card/Card";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
@@ -17,13 +17,12 @@ const ListTodo = ({ todos, actions }) => {
     actions.cleanTextFilter();
   }, []);
 
-  // function toggleTodo(id, ready) {
-  //   // console.log(id, ready);
-  //   actions.startToggleTodo(id, ready);
-  //   ready
-  //     ? toast.info("Still not ready?")
-  //     : toast.success("Great! You just did your todo");
-  // }
+  function toggleTodo(todoId, id, ready) {
+    actions.startToggleTodo(todoId, id, ready);
+    ready
+      ? toast.info("Still not ready?")
+      : toast.success("Great! You just did your todo");
+  }
 
   const todosList = todos.map(t => {
     return (
@@ -44,9 +43,9 @@ const ListTodo = ({ todos, actions }) => {
                   }
                   wrapper="span"
                   svgStyle={{ width: 20, height: 20 }}
-                  // onClick={() => {
-                  //   toggleTodo(t.id, todo.ready);
-                  // }}
+                  onClick={() => {
+                    toggleTodo(t.id, todo.id, todo.ready);
+                  }}
                 />
               </li>
             );

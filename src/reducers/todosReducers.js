@@ -73,25 +73,26 @@ export const startSetTodos = () => {
   };
 };
 
-export const toogleTodo = id => ({
+export const toogleTodo = (todoId, id) => ({
   type: types.TOGGLE_TODO,
+  todoId,
   id
 });
 
-export const startToggleTodo = (id, ready) => {
+export const startToggleTodo = (todoId, id, ready) => {
   return (dispatch, getState) => {
     let updateData = {};
     updateData["ready"] = !ready;
     const uid = getState().auth.uid;
     database
-      .ref(`users/${uid}/todos/${id}`)
-      .orderByChild("ready")
-      .equalTo(ready)
-      .once("value", function(snapshot) {
+      .ref(`users/${uid}/todos/${todoId}/todo`)
+      .orderByChild("id")
+      .equalTo(id)
+      .once("child_added", function(snapshot) {
         snapshot.ref.update(updateData);
       })
       .then(() => {
-        dispatch(toogleTodo(id));
+        dispatch(toogleTodo(todoId, id));
       });
   };
 };
@@ -107,17 +108,24 @@ const todosReducers = (state = todosDefaultState, action) => {
     case types.REMOVE_TODO:
       return state.filter(todo => todo.id !== action.id);
     case types.TOGGLE_TODO:
-      return state.map(todo => {
-        if (todo.id === action.id) {
-          todo.ready = !todo.ready;
-          return {
-            ...todo
-          };
-        } else {
-          return {
-            ...todo
-          };
+      return state.map(tod => {
+        if (tod.id === action.todoId) {
+          tod.todo.map(t => {
+            if (t.id === action.id) {
+              t.ready = !t.ready;
+              return {
+                ...t
+              };
+            } else {
+              return {
+                ...t
+              };
+            }
+          });
         }
+        return {
+          ...tod
+        };
       });
     case types.SET_TODO:
       return action.todos;

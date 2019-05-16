@@ -7,8 +7,11 @@ import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import Card from "../../layout/card/Card";
+import ContainerH1 from "../../layout/card/ContainerH1";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
+import TodoUl from "../../layout/todo/TodoUl";
+import TodoLi from "../../layout/todo/TodoLi";
 import ContainerCard from "../../layout/card/ContainerCard";
 import ReactSVG from "react-svg";
 
@@ -27,13 +30,14 @@ const ListTodo = ({ todos, actions }) => {
   const todosList = todos.map(t => {
     return (
       <Card key={t.id}>
-        <H1>
-          {t.id} <Button>X</Button>
-        </H1>
-        <ul>
+        <ContainerH1>
+          <H1>{t.id}</H1>
+          <Button>X</Button>
+        </ContainerH1>
+        <TodoUl>
           {t.todo.map((todo, i) => {
             return (
-              <li key={i}>
+              <TodoLi key={i}>
                 {todo.name}
                 <ReactSVG
                   src={
@@ -47,10 +51,10 @@ const ListTodo = ({ todos, actions }) => {
                     toggleTodo(t.id, todo.id, todo.ready);
                   }}
                 />
-              </li>
+              </TodoLi>
             );
           })}
-        </ul>
+        </TodoUl>
       </Card>
     );
   });

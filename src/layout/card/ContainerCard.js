@@ -6,6 +6,7 @@ const ContainerCard = styled.section`
   justify-content: space-evenly;
   flex-wrap: wrap;
   padding: 2rem;
+  width: 80vw;
 `;
 
 export default ContainerCard;

@@ -23,9 +23,6 @@ const Card = styled.article`
   ${({ theme }) => theme.media.tablet} {
     width: 45%;
   }
-  ${({ theme }) => theme.media.desktop} {
-    width: 600px;
-  }
   :hover {
     box-shadow: ${({ theme }) => theme.boxShadow.boxShadowCardHover};
   }

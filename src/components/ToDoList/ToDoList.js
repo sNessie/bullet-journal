@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import AddTodo from "./AddTodo";
 import ListTodo from "./ListTodo";
-import FiltersForm from "../DashboardPage/FiltersForm";
 import Layout from "../../layout/Layout";
 import { CenterContainer } from "../../layout/Container";
 import Button from "../../layout/Button";
@@ -21,7 +20,6 @@ const ToDoList = () => {
       <Helmet>
         <title>ToDo List - Bullet Journal</title>
       </Helmet>
-      <FiltersForm />
       <CenterContainer>
         <Button onClick={addFormShow}>Show add form</Button>
         {showAddForm ? <AddTodo hideAddForm={hideAddForm} /> : null}

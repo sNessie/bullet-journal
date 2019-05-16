@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-// import { visibleData } from "../../reducers/rootReducers";
-import { cleanTextFilter } from "../../reducers/filtersReducers";
 import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
@@ -16,10 +14,6 @@ import ContainerCard from "../../layout/card/ContainerCard";
 import ReactSVG from "react-svg";
 
 const ListTodo = ({ todos, actions }) => {
-  useEffect(() => {
-    actions.cleanTextFilter();
-  }, []);
-
   function toggleTodo(todoId, id, ready) {
     actions.startToggleTodo(todoId, id, ready);
     ready
@@ -27,12 +21,22 @@ const ListTodo = ({ todos, actions }) => {
       : toast.success("Great! You just did your todo");
   }
 
+  function deleteTodo(id) {
+    actions.startRemoveTodo(id);
+  }
+
   const todosList = todos.map(t => {
     return (
       <Card key={t.id}>
         <ContainerH1>
           <H1>{t.id}</H1>
-          <Button>X</Button>
+          <Button
+            onClick={() => {
+              deleteTodo(t.id);
+            }}
+          >
+            X
+          </Button>
         </ContainerH1>
         <TodoUl>
           {t.todo.map((todo, i) => {
@@ -72,7 +76,6 @@ ListTodo.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    filters: state.filters,
     todos: state.todos
   };
 };
@@ -80,7 +83,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     actions: {
-      cleanTextFilter: bindActionCreators(cleanTextFilter, dispatch),
       startRemoveTodo: bindActionCreators(startRemoveTodo, dispatch),
       startToggleTodo: bindActionCreators(startToggleTodo, dispatch)
     }

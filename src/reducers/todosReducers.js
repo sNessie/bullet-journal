@@ -30,7 +30,7 @@ export const removeTodo = ({ id } = {}) => ({
   id
 });
 
-export const startRemoveTodo = ({ id } = {}) => {
+export const startRemoveTodo = (id = "") => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
     database

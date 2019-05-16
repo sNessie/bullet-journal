@@ -1,8 +1,12 @@
-import React from 'react';
+import React from "react";
+import { Helmet } from "react-helmet";
 
 const MealPlanner = () => (
   <div>
-      MealPlanner Page
+    <Helmet>
+      <title>Meal Planner - Bullet Journal</title>
+    </Helmet>
+    MealPlanner Page
   </div>
 );
 

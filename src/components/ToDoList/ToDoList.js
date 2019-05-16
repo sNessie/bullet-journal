@@ -5,6 +5,7 @@ import FiltersForm from "../DashboardPage/FiltersForm";
 import Layout from "../../layout/Layout";
 import { CenterContainer } from "../../layout/Container";
 import Button from "../../layout/Button";
+import { Helmet } from "react-helmet";
 
 const ToDoList = () => {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -17,6 +18,9 @@ const ToDoList = () => {
   }
   return (
     <Layout>
+      <Helmet>
+        <title>ToDo List - Bullet Journal</title>
+      </Helmet>
       <FiltersForm />
       <CenterContainer>
         <Button onClick={addFormShow}>Show add form</Button>

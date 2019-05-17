@@ -48,7 +48,7 @@ const ListTodo = ({ todos, actions }) => {
         <TodoUl>
           <ListTodos
             t={t.id}
-            todo={t.todo}
+            todos={t.todo}
             deleteSingleTodo={deleteSingleTodo}
             toggleTodo={toggleTodo}
           />

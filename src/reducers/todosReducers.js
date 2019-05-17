@@ -131,7 +131,10 @@ const todosReducers = (state = todosDefaultState, action) => {
     case types.REMOVE_SINGLE_TODO:
       return state.map(todo => {
         if (todo.id === action.todoId) {
-          return todo.todo.filter(t => t.id !== action.id);
+          return {
+            id: todo.id,
+            todo: todo.todo.filter(t => t.id !== action.id)
+          };
         } else {
           return { ...todo };
         }

@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { startRemoveTodo, startToggleTodo } from "../../reducers/todosReducers";
+import {
+  startRemoveTodo,
+  startToggleTodo,
+  startRemoveSingleTodo
+} from "../../reducers/todosReducers";
 import { bindActionCreators } from "redux";
 import { toast } from "react-toastify";
 import Card from "../../layout/card/Card";
@@ -9,9 +13,8 @@ import ContainerH1 from "../../layout/card/ContainerH1";
 import H1 from "../../layout/card/H1";
 import Button from "../../layout/Button";
 import TodoUl from "../../layout/todo/TodoUl";
-import TodoLi from "../../layout/todo/TodoLi";
 import ContainerCard from "../../layout/card/ContainerCard";
-import ReactSVG from "react-svg";
+import ListTodos from "./ListTodos";
 
 const ListTodo = ({ todos, actions }) => {
   function toggleTodo(todoId, id, ready) {
@@ -23,6 +26,10 @@ const ListTodo = ({ todos, actions }) => {
 
   function deleteTodo(id) {
     actions.startRemoveTodo(id);
+  }
+
+  function deleteSingleTodo(todoId, id) {
+    actions.startRemoveSingleTodo(todoId, id);
   }
 
   const todosList = todos.map(t => {
@@ -39,25 +46,12 @@ const ListTodo = ({ todos, actions }) => {
           </Button>
         </ContainerH1>
         <TodoUl>
-          {t.todo.map((todo, i) => {
-            return (
-              <TodoLi key={i}>
-                {todo.name}
-                <ReactSVG
-                  src={
-                    todo.ready
-                      ? "img/svg/checkmark.svg"
-                      : "img/svg/checkmark2.svg"
-                  }
-                  wrapper="span"
-                  svgStyle={{ width: 20, height: 20 }}
-                  onClick={() => {
-                    toggleTodo(t.id, todo.id, todo.ready);
-                  }}
-                />
-              </TodoLi>
-            );
-          })}
+          <ListTodos
+            t={t.id}
+            todo={t.todo}
+            deleteSingleTodo={deleteSingleTodo}
+            toggleTodo={toggleTodo}
+          />
         </TodoUl>
       </Card>
     );
@@ -84,6 +78,10 @@ const mapDispatchToProps = dispatch => {
   return {
     actions: {
       startRemoveTodo: bindActionCreators(startRemoveTodo, dispatch),
+      startRemoveSingleTodo: bindActionCreators(
+        startRemoveSingleTodo,
+        dispatch
+      ),
       startToggleTodo: bindActionCreators(startToggleTodo, dispatch)
     }
   };

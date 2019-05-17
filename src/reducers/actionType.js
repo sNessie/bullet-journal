@@ -8,6 +8,7 @@ export const SET_HABITS = "SET_HABITS";
 export const ADD_TODO = "ADD_TODO";
 export const ADD_NEW_TODO = "ADD_NEW_TODO";
 export const REMOVE_TODO = "REMOVE_TODO";
+export const REMOVE_SINGLE_TODO = "REMOVE_SINGLE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const SET_TODO = "SET_TODO";
 export const TOGGLE_TODO = "TOGGLE_TODO";

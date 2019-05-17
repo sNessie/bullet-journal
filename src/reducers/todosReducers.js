@@ -30,6 +30,27 @@ export const removeTodo = ({ id } = {}) => ({
   id
 });
 
+export const removeSingleTodo = (todoId = "", id = "") => ({
+  type: types.REMOVE_SINGLE_TODO,
+  todoId,
+  id
+});
+
+export const startRemoveSingleTodo = (todoId = "", id = "") => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    database
+      .ref(`users/${uid}/todos/${todoId}/todo`)
+      .orderByChild("id")
+      .equalTo(id)
+      .once("child_added", function(snapshot) {
+        snapshot.ref.remove();
+      })
+      .then(() => {
+        dispatch(removeSingleTodo(todoId, id));
+      });
+  };
+};
 export const startRemoveTodo = (id = "") => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
@@ -107,6 +128,14 @@ const todosReducers = (state = todosDefaultState, action) => {
       );
     case types.REMOVE_TODO:
       return state.filter(todo => todo.id !== action.id);
+    case types.REMOVE_SINGLE_TODO:
+      return state.map(todo => {
+        if (todo.id === action.todoId) {
+          return todo.todo.filter(t => t.id !== action.id);
+        } else {
+          return { ...todo };
+        }
+      });
     case types.TOGGLE_TODO:
       return state.map(tod => {
         if (tod.id === action.todoId) {

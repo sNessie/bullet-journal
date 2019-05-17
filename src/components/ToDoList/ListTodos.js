@@ -21,7 +21,7 @@ const ListTodos = ({ t, todo, deleteSingleTodo, toggleTodo }) => {
           wrapper="span"
           svgStyle={{ width: 20, height: 20 }}
           onClick={() => {
-            toggleTodo(t.id, todo.id, todo.ready);
+            toggleTodo(t, todo.id, todo.ready);
           }}
         />
       </TodoLi>

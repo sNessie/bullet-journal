@@ -12,6 +12,13 @@ export const visibleData = (data, { text }) => {
   });
 };
 
+export const sortByDate = todos => {
+  todos.sort(function(a, b) {
+    return new Date(a.id) - new Date(b.id);
+  });
+  return todos;
+};
+
 export const setCategories = (todos, category) => {
   todos.map(todo => {
     todo.todo.map(t => {

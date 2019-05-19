@@ -15,6 +15,7 @@ import Button from "../../layout/Button";
 import TodoUl from "../../layout/todo/TodoUl";
 import ContainerCard from "../../layout/card/ContainerCard";
 import ListTodos from "./ListTodos";
+import { sortByDate } from "../../reducers/rootReducers";
 
 const ListTodo = ({ todos, actions }) => {
   function toggleTodo(todoId, id, ready) {
@@ -70,7 +71,7 @@ ListTodo.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    todos: state.todos
+    todos: sortByDate(state.todos)
   };
 };
 

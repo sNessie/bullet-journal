@@ -1,34 +1,42 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../../layout/Button";
 import TodoLi from "../../layout/todo/TodoLi";
 import ReactSVG from "react-svg";
 
 const ListTodos = ({ t, todos, deleteSingleTodo, toggleTodo }) => {
-  const todosList = todos.map((todo, i) => {
+  const todosList = todos.map(todo => {
     return (
-      <TodoLi key={i}>
+      <TodoLi key={todo.id}>
         {todo.name}
-        {todos.length === 1 ? (
-          ""
-        ) : (
-          <Button
-            onClick={() => {
-              deleteSingleTodo(t, todo.id);
-            }}
-          >
-            X
-          </Button>
-        )}
+        <div>
+          {todos.length === 1 ? (
+            ""
+          ) : (
+            <ReactSVG
+              src="img/svg/close.svg"
+              wrapper="span"
+              svgStyle={{
+                width: 20,
+                height: 20,
+                cursor: "pointer"
+              }}
+              onClick={() => {
+                deleteSingleTodo(t, todo.id);
+              }}
+            />
+          )}
 
-        <ReactSVG
-          src={todo.ready ? "img/svg/checkmark.svg" : "img/svg/checkmark2.svg"}
-          wrapper="span"
-          svgStyle={{ width: 20, height: 20 }}
-          onClick={() => {
-            toggleTodo(t, todo.id, todo.ready);
-          }}
-        />
+          <ReactSVG
+            src={
+              todo.ready ? "img/svg/checkmark.svg" : "img/svg/checkmark2.svg"
+            }
+            wrapper="span"
+            svgStyle={{ width: 20, height: 20, cursor: "pointer" }}
+            onClick={() => {
+              toggleTodo(t, todo.id, todo.ready);
+            }}
+          />
+        </div>
       </TodoLi>
     );
   });

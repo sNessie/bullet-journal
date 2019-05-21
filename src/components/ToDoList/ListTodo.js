@@ -27,10 +27,12 @@ const ListTodo = ({ todos, actions }) => {
 
   function deleteTodo(id) {
     actions.startRemoveTodo(id);
+    toast.success("All day has been removed");
   }
 
   function deleteSingleTodo(todoId, id) {
     actions.startRemoveSingleTodo(todoId, id);
+    toast.success("Todo has been removed");
   }
 
   const todosList = todos.map(t => {

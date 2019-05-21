@@ -6,7 +6,7 @@ import ReactSVG from "react-svg";
 const ListTodos = ({ t, todos, deleteSingleTodo, toggleTodo }) => {
   const todosList = todos.map(todo => {
     return (
-      <TodoLi key={todo.id}>
+      <TodoLi priority={todo.priority} key={todo.id}>
         {todo.name}
         <div>
           {todos.length === 1 ? (

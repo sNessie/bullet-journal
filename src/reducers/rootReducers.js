@@ -3,6 +3,7 @@ import habitsReducers from "./habitsReducers";
 import filtersReducers from "./filtersReducers";
 import todosReducers from "./todosReducers";
 import categoriesReducers from "./categoriesReducers";
+import dashboardReducers from "./dasboardReducers";
 import authReducer from "./auth";
 
 export const visibleData = (data, { text }) => {
@@ -31,10 +32,21 @@ export const setCategories = (todos, category) => {
   return category;
 };
 
+export const amountTodos = todos => {
+  const today = new Date().toISOString().substring(0, 10);
+  const todayTodos = todos.find(todo => todo.id === today);
+  if (todayTodos == null) {
+    return 0;
+  } else {
+    return todayTodos.todo.length;
+  }
+};
+
 export const rootReducers = combineReducers({
   todos: todosReducers,
   habits: habitsReducers,
   filters: filtersReducers,
   auth: authReducer,
-  categories: categoriesReducers
+  categories: categoriesReducers,
+  dashboard: dashboardReducers
 });

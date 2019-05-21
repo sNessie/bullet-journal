@@ -12,3 +12,4 @@ export const REMOVE_SINGLE_TODO = "REMOVE_SINGLE_TODO";
 export const EDIT_TODO = "EDIT_TODO";
 export const SET_TODO = "SET_TODO";
 export const TOGGLE_TODO = "TOGGLE_TODO";
+export const AMOUNT_TODO = "AMOUNT_TODO";

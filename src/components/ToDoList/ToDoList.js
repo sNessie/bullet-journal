@@ -6,10 +6,10 @@ import { CenterContainer } from "../../layout/Container";
 import Button from "../../layout/Button";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
-import { amountTodos } from "../../reducers/rootReducers";
 import PropTypes from "prop-types";
+import { amountTodos } from "../../reducers/rootReducers";
 
-const ToDoList = ({ amountTodo }) => {
+const ToDoList = ({ dashboard }) => {
   const [showAddForm, setShowAddForm] = useState(false);
 
   function hideAddForm() {
@@ -22,7 +22,9 @@ const ToDoList = ({ amountTodo }) => {
   return (
     <Layout>
       <Helmet>
-        <title>({amountTodo.toString()}) ToDo List - Bullet Journal</title>
+        <title>
+          ({dashboard.todoAmount.toString()}) ToDo List - Bullet Journal
+        </title>
       </Helmet>
       <CenterContainer>
         <Button onClick={addFormShow}>Show add form</Button>
@@ -33,12 +35,13 @@ const ToDoList = ({ amountTodo }) => {
   );
 };
 ToDoList.propTypes = {
-  amountTodo: PropTypes.number.isRequired
+  dashboard: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => {
   return {
-    amountTodo: amountTodos(state.todos)
+    dashboard: amountTodos(state.todos)
   };
 };
+
 export default connect(mapStateToProps)(ToDoList);

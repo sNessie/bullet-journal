@@ -36,9 +36,9 @@ export const amountTodos = todos => {
   const today = new Date().toISOString().substring(0, 10);
   const todayTodos = todos.find(todo => todo.id === today);
   if (todayTodos == null) {
-    return 0;
+    return { todo: todayTodos, todoAmount: 0 };
   } else {
-    return todayTodos.todo.length;
+    return { todo: todayTodos, todoAmount: todayTodos.todo.length };
   }
 };
 
